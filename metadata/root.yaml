@@ -1,0 +1,26 @@
+helloworld:
+  display_name: Hello World
+  description: Hello world is a new addon that has prometheus fake data.
+  logo: helloworld/logo.svg
+  category: monitoring
+  overview: helloworld/overview.md
+  resources:
+    provider:
+      title: Prometheus
+      link: https://prometheus.io
+    links:
+      - type: resources
+        title: Tutorials
+        link: https://prometheus.io/docs/prometheus/latest/getting_started/
+      - type: resources
+        title: Documentation
+        link: https://prometheus.io/docs/introduction/overview/
+      - type: release_notes
+        title: Release Notes
+        link: https://github.com/prometheus/prometheus/releases/tag/v2.10.0
+      - type: release_notes
+        title: Change Log
+        link: https://github.com/prometheus/prometheus/releases/tag/v2.10.0
+      - type: support
+        title: Submit a Support Request
+        link: https://d2iq.com/services-and-support
