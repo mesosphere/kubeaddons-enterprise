@@ -1,0 +1,28 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: zookeeper
+  namespace: kubeaddons
+  labels:
+    kubeaddons.mesosphere.io/name: zookeeper
+  annotations:
+    catalog.kubeaddons.mesosphere.io/addon-revision: "0.1.0"
+    appversion.kubeaddons.mesosphere.io/zookeeper: "0.2.0"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.15.0
+  requires:
+    - matchLabels:
+        kubeaddons.mesosphere.io/name: kudo
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: docker
+      enabled: false
+    - name: none
+      enabled: true
+  kudoReference:
+    package: zookeeper
+    repo: https://kudo-repository.storage.googleapis.com/
+    version: 0.2.0
