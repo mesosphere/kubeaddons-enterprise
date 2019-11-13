@@ -1,0 +1,28 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: kafka
+  namespace: kubeaddons
+  labels:
+    kubeaddons.mesosphere.io/name: kafka
+  annotations:
+    catalog.kubeaddons.mesosphere.io/addon-revision: "0.1.0-1"
+    appversion.kubeaddons.mesosphere.io/kafka: "1.0.0"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.16.0
+  requires:
+    - matchLabels:
+        kubeaddons.mesosphere.io/name: kudo
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: docker
+      enabled: true
+    - name: none
+      enabled: true
+  kudoReference:
+    package: kafka
+    repo: https://kudo-repository.storage.googleapis.com/
+    version: 1.0.0
