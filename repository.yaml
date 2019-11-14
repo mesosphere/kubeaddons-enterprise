@@ -1,0 +1,9 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: AddonRepository
+metadata:
+  name: kubeaddons-enterprise
+spec:
+  priority: "20.5"
+  url: "https://github.com/mesosphere/kubeaddons-enterprise"
+  ref: "v0.0.1"
