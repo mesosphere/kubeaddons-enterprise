@@ -7,11 +7,11 @@ metadata:
   labels:
     kubeaddons.mesosphere.io/name: zookeeper
   annotations:
-    catalog.kubeaddons.mesosphere.io/addon-revision: "0.1.0"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "0.1.0-1"
     appversion.kubeaddons.mesosphere.io/zookeeper: "0.2.0"
 spec:
   kubernetes:
-    minSupportedVersion: v1.15.0
+    minSupportedVersion: v1.16.0
   requires:
     - matchLabels:
         kubeaddons.mesosphere.io/name: kudo
@@ -19,7 +19,7 @@ spec:
     - name: aws
       enabled: true
     - name: docker
-      enabled: false
+      enabled: true
     - name: none
       enabled: true
   kudoReference:
