@@ -2,22 +2,20 @@
 apiVersion: kubeaddons.mesosphere.io/v1beta1
 kind: Addon
 metadata:
-  name: kafka
+  name: zookeeper
   namespace: kubeaddons
   labels:
-    kubeaddons.mesosphere.io/name: kafka
+    kubeaddons.mesosphere.io/name: zookeeper
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "0.1.0-1"
-    appversion.kubeaddons.mesosphere.io/kafka: "1.0.0"
+    appversion.kubeaddons.mesosphere.io/zookeeper: "0.2.0"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.0
   requires:
     - matchLabels:
         kubeaddons.mesosphere.io/name: kudo
-    - matchLabels:
-        kubeaddons.mesosphere.io/name: zookeeper
   cloudProvider:
     - name: aws
       enabled: true
@@ -26,6 +24,6 @@ spec:
     - name: none
       enabled: true
   kudoReference:
-    package: kafka
+    package: zookeeper
     repo: https://kudo-repository.storage.googleapis.com/
-    version: 1.0.0
+    version: 0.2.0
