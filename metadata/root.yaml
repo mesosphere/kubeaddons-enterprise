@@ -24,3 +24,37 @@ helloworld:
       - type: support
         title: Submit a Support Request
         link: https://d2iq.com/services-and-support
+kafka:
+  display_name: Kafka
+  description: Apache Kafka
+  logo: kafka/logo.svg
+  category: dataservice
+  overview: kafka/overview.md
+  resources:
+    provider:
+      title: Kafka
+      link: https://kafka.apache.org/
+    links:
+      - type: resources
+        title: Documentation
+        link: https://kafka.apache.org/
+      - type: support
+        title: Submit a Support Request
+        link: https://d2iq.com/services-and-support
+zookeeper:
+  display_name: Zookeeper
+  description: Apache Zookeeper
+  logo: zookeeper/logo.svg
+  category: dataservice
+  overview: zookeeper/overview.md
+  resources:
+    provider:
+      title: Zookeeper
+      link: http://zookeeper.apache.org/
+    links:
+      - type: resources
+        title: Documentation
+        link: http://zookeeper.apache.org/
+      - type: support
+        title: Submit a Support Request
+        link: https://d2iq.com/services-and-support
