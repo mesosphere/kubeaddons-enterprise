@@ -3,7 +3,6 @@ apiVersion: kubeaddons.mesosphere.io/v1beta1
 kind: Addon
 metadata:
   name: zookeeper
-  namespace: kubeaddons
   labels:
     kubeaddons.mesosphere.io/name: zookeeper
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
