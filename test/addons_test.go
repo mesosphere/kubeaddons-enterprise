@@ -1,7 +1,7 @@
 package test
 
 import (
-	"io/ioutil"
+	"fmt"
 	"testing"
 
 	"github.com/blang/semver"
@@ -24,26 +24,34 @@ func TestAddons(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	b, err := ioutil.ReadFile("../addons/zookeeper/0.x/zookeeper.yaml")
+	addons, err := temp.Addons("../addons/")
 	if err != nil {
 		t.Fatal(err)
 	}
-	ro, err := test.DecodeObjectFromManifest(b)
-	if err != nil {
-		t.Fatal(err)
-	}
-	addon, ok := ro.(v1beta1.AddonInterface)
-	if !ok {
-		t.Fatalf("invalid addon provided: %+v", ro)
-	}
-	addon.SetNamespace("default")
 
-	th, err := test.NewBasicTestHarness(t, cluster, addon)
+	// Kafka needs special attention right now to ensure it can find its dependency ZK
+	if revisions, ok := addons["kafka"]; ok {
+		for _, revision := range revisions {
+			zkuri := fmt.Sprintf("ZOOKEEPER_URI: zookeeper-cs.%s.svc", addons["zookeeper"][0].GetNamespace())
+			revision.GetAddonSpec().KudoReference.Parameters = &zkuri
+		}
+	}
+
+	testAddons := []v1beta1.AddonInterface{}
+	for _, v := range addons {
+		// TODO - for right now, we're only testing the latest revision.
+		// We're waiting on additional features from the test harness to
+		// expand this, see https://jira.mesosphere.com/browse/DCOS-61266
+		testAddons = append(testAddons, v[0])
+	}
+
+	th, err := test.NewBasicTestHarness(t, cluster, testAddons...)
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer th.Cleanup()
 
 	th.Validate()
 	th.Deploy()
-	th.Cleanup()
+
 }
