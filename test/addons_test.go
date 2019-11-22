@@ -49,8 +49,9 @@ func TestAddons(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer th.Cleanup()
 
 	th.Validate()
 	th.Deploy()
-	th.Cleanup()
+
 }
