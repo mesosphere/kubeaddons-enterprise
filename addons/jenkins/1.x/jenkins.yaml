@@ -26,8 +26,7 @@ spec:
     - matchLabels:
         kubeaddons.mesosphere.io/provides: traefik
   chartReference:
-    chart: jenkins
-    repo: https://mesosphere.github.io/charts/stable
+    chart: stable/jenkins
     version: 1.9.4
     values: |
       ---
@@ -41,11 +40,11 @@ spec:
           - credentials-binding:1.19
           - git:3.11.0
         csrf:
-        defaultCrumbIssuer:
-          enabled: false
-          proxyCompatability: false
+          defaultCrumbIssuer:
+            enabled: false
+            proxyCompatability: false
         prometheus:
-        enabled: true
+          enabled: true
         serviceMonitorNamespace: "kubeaddons"
         serviceMonitorAdditionalLabels:
           app: jenkins
@@ -53,7 +52,7 @@ spec:
         serviceType: "ClusterIP"
         jenkinsUriPrefix: "/jenkins"
         ingress:
-        enabled: true
+          enabled: true
         path: /jenkins
         annotations:
-            kubernetes.io/ingress.class: traefik
+          kubernetes.io/ingress.class: traefik
