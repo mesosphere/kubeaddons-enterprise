@@ -1,3 +1,20 @@
+jenkins:
+  display_name: Jenkins
+  description: Jenkins
+  logo: jenkins/logo.svg
+  category: ci/cd
+  overview: jenkins/overview.md
+  resources:
+    provider:
+      title: Jenkins
+      link: https://jenkins.io/
+    links:
+      - type: resources
+        title: Documentation
+        link: https://jenkins.io/
+      - type: support
+        title: Submit a Support Request
+        link: https://d2iq.com/services-and-support
 kafka:
   display_name: Kafka
   description: Apache Kafka
