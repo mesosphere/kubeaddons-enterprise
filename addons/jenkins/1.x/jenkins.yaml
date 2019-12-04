@@ -12,7 +12,7 @@ metadata:
     values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/kaiwalyajoshi/mesosphere-helm-charts/kjoshi/kubeaddons-jenkins/stable/jenkins/values.yaml"
 spec:
   kubernetes:
-    minSupportedVersion: v1.15.0
+    minSupportedVersion: v1.16.3
   cloudProvider:
     - name: aws
       enabled: true
