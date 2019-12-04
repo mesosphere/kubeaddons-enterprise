@@ -5,9 +5,10 @@ import (
 	"testing"
 
 	"github.com/blang/semver"
+	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/mesosphere/kubeaddons/api/v1beta1"
 	"github.com/mesosphere/kubeaddons/hack/temp"
+	"github.com/mesosphere/kubeaddons/pkg/api/v1beta1"
 	"github.com/mesosphere/kubeaddons/pkg/test"
 	"github.com/mesosphere/kubeaddons/pkg/test/cluster/kind"
 )
@@ -29,12 +30,12 @@ func TestAddons(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Kafka needs special attention right now to ensure it can find its dependency ZK
-	if revisions, ok := addons["kafka"]; ok {
-		for _, revision := range revisions {
-			zkuri := fmt.Sprintf("ZOOKEEPER_URI: zookeeper-cs.%s.svc", addons["zookeeper"][0].GetNamespace())
-			revision.GetAddonSpec().KudoReference.Parameters = &zkuri
-		}
+	// TODO: Kafka needs special attention right now to ensure it can find its dependency ZK
+	kafkaFilters(addons)
+
+	// TODO: for speed, prometheus options and requirements are disabled for Jenkins for now
+	if err := jenkinsFilters(addons); err != nil {
+		t.Fatal(err)
 	}
 
 	testAddons := []v1beta1.AddonInterface{}
@@ -54,4 +55,23 @@ func TestAddons(t *testing.T) {
 	th.Validate()
 	th.Deploy()
 
+}
+
+func kafkaFilters(addons map[string][]v1beta1.AddonInterface) {
+	if revisions, ok := addons["kafka"]; ok {
+		for _, revision := range revisions {
+			zkuri := fmt.Sprintf("ZOOKEEPER_URI: zookeeper-cs.%s.svc", addons["zookeeper"][0].GetNamespace())
+			revision.GetAddonSpec().KudoReference.Parameters = &zkuri
+		}
+	}
+}
+
+func jenkinsFilters(addons map[string][]v1beta1.AddonInterface) error {
+	if revisions, ok := addons["jenkins"]; ok {
+		for _, revision := range revisions {
+			// TODO: for now we're going to remove deps for speed, jenkins can deploy usably without traefik.
+			revision.GetAddonSpec().Requires = make([]v1.LabelSelector, 0)
+		}
+	}
+	return nil
 }
