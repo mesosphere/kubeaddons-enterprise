@@ -1,1 +1,5 @@
-* @mesosphere-eng-noctilucent
+* @joejulian @shaneutt
+
+addons/zookeeper/* @nfnt @zmalik
+addons/kafka/* @nfnt @zmalik
+addons/jenkins/* @kaiwalyajoshi
