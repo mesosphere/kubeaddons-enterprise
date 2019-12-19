@@ -2,6 +2,8 @@ package test
 
 import (
 	"fmt"
+	"os"
+	"os/exec"
 	"testing"
 
 	"github.com/blang/semver"
@@ -9,22 +11,15 @@ import (
 
 	"github.com/mesosphere/kubeaddons/hack/temp"
 	"github.com/mesosphere/kubeaddons/pkg/api/v1beta1"
+	"github.com/mesosphere/kubeaddons/pkg/repositories/addons/revisions"
 	"github.com/mesosphere/kubeaddons/pkg/test"
 	"github.com/mesosphere/kubeaddons/pkg/test/cluster/kind"
 )
 
+const testNamespace = "default"
+
 // TestAddons tests deployment of all addons in this repository
 func TestAddons(t *testing.T) {
-	cluster, err := kind.NewCluster(semver.MustParse("1.16.3"))
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer cluster.Cleanup()
-
-	if err := temp.DeployController(cluster); err != nil {
-		t.Fatal(err)
-	}
-
 	addons, err := temp.Addons("../addons/")
 	if err != nil {
 		t.Fatal(err)
@@ -46,6 +41,24 @@ func TestAddons(t *testing.T) {
 		testAddons = append(testAddons, v[0])
 	}
 
+	cluster, err := kind.NewCluster(semver.MustParse("1.16.3"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer cluster.Cleanup()
+
+	if err := temp.DeployController(cluster, "kind"); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := deployKudo(cluster); err != nil {
+		t.Fatal(err)
+	}
+
+	for _, testAddon := range testAddons {
+		testAddon.SetNamespace(testNamespace)
+	}
+
 	th, err := test.NewBasicTestHarness(t, cluster, testAddons...)
 	if err != nil {
 		t.Fatal(err)
@@ -57,7 +70,7 @@ func TestAddons(t *testing.T) {
 
 }
 
-func kafkaFilters(addons map[string][]v1beta1.AddonInterface) {
+func kafkaFilters(addons map[string]revisions.AddonRevisions) {
 	if revisions, ok := addons["kafka"]; ok {
 		for _, revision := range revisions {
 			zkuri := fmt.Sprintf("ZOOKEEPER_URI: zookeeper-cs.%s.svc", addons["zookeeper"][0].GetNamespace())
@@ -91,7 +104,7 @@ master:
     enabled: false
 `
 
-func jenkinsFilters(addons map[string][]v1beta1.AddonInterface) error {
+func jenkinsFilters(addons map[string]revisions.AddonRevisions) error {
 	if revisions, ok := addons["jenkins"]; ok {
 		for _, revision := range revisions {
 			// TODO: for now we're going to remove deps for speed, jenkins can deploy usably without traefik.
@@ -100,4 +113,15 @@ func jenkinsFilters(addons map[string][]v1beta1.AddonInterface) error {
 		}
 	}
 	return nil
+}
+
+// TODO - this is a temporary lockin to a specific revision, later we should switch to using
+// the repository library instead and selecting the latest `v0.7.x` release by revision semver
+const kudoAddonURL = "https://raw.githubusercontent.com/mesosphere/kubernetes-base-addons/master/addons/kudo/0.7.x/kudo-1.yaml"
+
+func deployKudo(cluster test.Cluster) error {
+	cmd := exec.Command("kubectl", "--kubeconfig", cluster.ConfigPath(), "apply", "-f", kudoAddonURL)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
 }
