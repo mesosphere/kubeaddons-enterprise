@@ -2,7 +2,7 @@ jenkins:
   display_name: Jenkins
   description: Jenkins
   logo: jenkins/logo.svg
-  category: ci/cd
+  category: CI/CD
   overview: jenkins/overview.md
   resources:
     provider:
@@ -19,7 +19,7 @@ kafka:
   display_name: Kafka
   description: Apache Kafka
   logo: kafka/logo.svg
-  category: dataservice
+  category: Data Services
   overview: kafka/overview.md
   resources:
     provider:
@@ -36,7 +36,7 @@ zookeeper:
   display_name: Zookeeper
   description: Apache Zookeeper
   logo: zookeeper/logo.svg
-  category: dataservice
+  category: Data Services
   overview: zookeeper/overview.md
   resources:
     provider:
