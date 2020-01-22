@@ -39,12 +39,6 @@ spec:
           defaultCrumbIssuer:
             enabled: false
             proxyCompatability: false
-        prometheus:
-          enabled: true
-          serviceMonitorNamespace: "kubeaddons"
-          serviceMonitorAdditionalLabels:
-            app: jenkins
-            release: prometheus-kubeaddons
         serviceType: "ClusterIP"
         jenkinsUriPrefix: "/jenkins"
         ingress:
