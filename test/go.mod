@@ -4,24 +4,28 @@ go 1.13
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
-	github.com/emicklei/go-restful v2.11.1+incompatible // indirect
-	github.com/go-openapi/spec v0.19.4 // indirect
+	github.com/docker/docker v1.4.2-0.20190916154449-92cc603036dd
+	github.com/google/gofuzz v1.1.0 // indirect
+	github.com/google/uuid v1.1.1
 	github.com/imdario/mergo v0.3.8 // indirect
-	github.com/mesosphere/kubeaddons v0.5.4-0.20191122175928-ab87ea3a1c0a
+	github.com/json-iterator/go v1.1.9 // indirect
+	github.com/mesosphere/kubeaddons v0.7.4
 	go.uber.org/atomic v1.5.1 // indirect
 	go.uber.org/multierr v1.4.0 // indirect
 	go.uber.org/zap v1.13.0 // indirect
-	golang.org/x/crypto v0.0.0-20191119213627-4f8c1d86b1ba // indirect
-	golang.org/x/net v0.0.0-20191119073136-fc4aabc6c914 // indirect
-	golang.org/x/sys v0.0.0-20191120155948-bd437916bb0e // indirect
+	golang.org/x/crypto v0.0.0-20200117160349-530e935923ad // indirect
+	golang.org/x/lint v0.0.0-20191125180803-fdd1cda4f05f // indirect
+	golang.org/x/net v0.0.0-20200114155413-6afb5195e5aa // indirect
+	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d // indirect
+	golang.org/x/sys v0.0.0-20200122134326-e047566fdf82 // indirect
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
-	golang.org/x/tools v0.0.0-20191122161556-0ae87fff1b85 // indirect
-	golang.org/x/xerrors v0.0.0-20191011141410-1b5146add898 // indirect
+	golang.org/x/tools v0.0.0-20200122042241-dc16b66866f1 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
-	gopkg.in/yaml.v2 v2.2.7 // indirect
-	k8s.io/apiextensions-apiserver v0.0.0-20191121021419-88daf26ec3b8 // indirect
-	k8s.io/utils v0.0.0-20191114200735-6ca3b61696b6 // indirect
-	sigs.k8s.io/controller-runtime v0.4.0 // indirect
+	gopkg.in/yaml.v2 v2.2.7
+	gopkg.in/yaml.v3 v3.0.0-20200121175148-a6ecf24a6d71
+	k8s.io/apiextensions-apiserver v0.17.2 // indirect
+	k8s.io/utils v0.0.0-20200117235808-5f6fbceb4c31 // indirect
+	sigs.k8s.io/kind v0.7.0
 )
 
 replace k8s.io/client-go => k8s.io/client-go v0.0.0-20191114101535-6c5935290e33
