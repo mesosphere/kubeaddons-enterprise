@@ -8,7 +8,7 @@ metadata:
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "1.9.4-1"
     appversion.kubeaddons.mesosphere.io/jenkins: "1.9.4"
-    values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/kaiwalyajoshi/mesosphere-helm-charts/kjoshi/kubeaddons-jenkins/stable/jenkins/values.yaml"
+    values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/helm/charts/master/stable/jenkins/values.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.3
