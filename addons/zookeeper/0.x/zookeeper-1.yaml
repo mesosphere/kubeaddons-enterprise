@@ -21,6 +21,6 @@ spec:
       enabled: true
   kudoReference:
     package: zookeeper
-    repo: https://kudo-repository.storage.googleapis.com
+    repo: https://kudo-repository.storage.googleapis.com/0.10.0
     version: 0.2.0
 
