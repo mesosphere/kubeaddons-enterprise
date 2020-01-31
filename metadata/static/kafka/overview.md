@@ -1,26 +1,20 @@
 ## Overview
-Hello World, a fake [Cloud Native Computing Foundation](https://cncf.io/) project that looks like prometheus.
+Apache Kafka is used for building real-time data pipelines and streaming apps. It is horizontally scalable, fault-tolerant, wicked fast, and runs in production in thousands of companies
 
-It is a systems and service monitoring system. It collects metrics
-from configured targets at given intervals, evaluates rule expressions,
-displays the results, and can trigger alerts if some condition is observed
-to be true.
+The KUDO Kafka operator creates, configures and manages Apache Kafka clusters running on Kubernetes.
 
-Prometheus' main distinguishing features as compared to other monitoring systems are:
-
-- a **multi-dimensional** data model (timeseries defined by metric name and set of key/value dimensions)
-- a **flexible query language** to leverage this dimensionality
-- no dependency on distributed storage; **single server nodes are autonomous**
-- timeseries collection happens via a **pull model** over HTTP
-- **pushing timeseries** is supported via an intermediary gateway
-- targets are discovered via **service discovery** or **static configuration**
-- multiple modes of **graphing and dashboarding support**
-- support for hierarchical and horizontal **federation**
+- Secure cluster through TLS encryption, Kerberos authentication and Kafka AuthZ
+- Prometheus metrics right out of the box with example of Grafana dashboards
+- Kerberos support
+- Graceful rolling updates for any cluster configuration changes
+- Graceful rolling upgrades when upgrading the operator version
+- External access through LB/Nodeports
+- Mirror-maker integration
 
 ## Support Level
-- Mixed workload tested
-  - 600 Jenkins Masters
+- Mixed workload tested with 5 brokers, 4096Mib and 2000m each
+  - 5Million msgs/sec with avg message size of 60 bytes
 - Base tech support
 
 ## License
-[Apache License 2.0](https://github.com/prometheus/prometheus/blob/master/LICENSE)
+[Apache License 2.0](https://github.com/kudobuilder/operators/blob/master/LICENSE)
