@@ -21,7 +21,6 @@ The KUDO Spark Operator creates, configures, and manages instances of Spark Oper
   - 50 operators
   - 1000 Spark jobs with 1000 drivers and 1000 executor pods running concurrently
   - TeraSort benchmark successfully completed and validated  
-- Base tech support
 
 ## License
 [Apache License 2.0](https://github.com/kudobuilder/operators/blob/master/LICENSE)
