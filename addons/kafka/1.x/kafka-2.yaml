@@ -15,6 +15,9 @@ spec:
   requires:
     - matchLabels:
         kubeaddons.mesosphere.io/name: zookeeper
+    - matchLabels:
+        # requires servicemonitors.monitoring.coreos.com CRD to be present
+        kubeaddons.mesosphere.io/name: prometheus
   cloudProvider:
     - name: aws
       enabled: true

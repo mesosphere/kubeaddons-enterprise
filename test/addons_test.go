@@ -4,8 +4,6 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
-	"os"
-	"os/exec"
 	"testing"
 
 	"github.com/blang/semver"
@@ -26,10 +24,17 @@ import (
 
 const (
 	defaultKubernetesVersion = "1.16.4"
-	patchStorageClass        = `{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}`
 )
 
-var addonTestingGroups = make(map[string][]string)
+var addonTestingGroups = make(map[string][]AddonTestConfiguration)
+
+type AddonTestConfiguration struct {
+	Name               string   `json:"name,omitempty" yaml:"name,omitempty"`
+	// Override the values for helm chart and parameters for kudo operators
+	Override           string   `json:"override,omitempty" yaml:"override,omitempty"`
+	// List of requirements to be removed from the addon
+	RemoveDependencies []string `json:"removeDependencies,omitempty" yaml:"removeDependencies,omitempty"`
+}
 
 func init() {
 	b, err := ioutil.ReadFile("groups.yaml")
@@ -106,7 +111,7 @@ func createNodeVolumes(numberVolumes int, nodePrefix string, node *v1alpha3.Node
 	return nil
 }
 
-func cleanupNodeVolumes(numberVolumes int, nodePrefix string, node *v1alpha3.Node) error {
+func cleanupNodeVolumes(numberVolumes int, nodePrefix string) error {
 	dockerClient, err := docker.NewClientWithOpts(docker.FromEnv)
 	if err != nil {
 		return fmt.Errorf("creating docker client: %w", err)
@@ -139,7 +144,7 @@ func testgroup(t *testing.T, groupname string) error {
 		return err
 	}
 	defer func() {
-		if err := cleanupNodeVolumes(3, u.String(), &node); err != nil {
+		if err := cleanupNodeVolumes(3, u.String()); err != nil {
 			t.Logf("error: %s", err)
 		}
 	}()
@@ -171,34 +176,28 @@ func testgroup(t *testing.T, groupname string) error {
 	return nil
 }
 
-func addons(names ...string) ([]v1beta1.AddonInterface, error) {
+func addons(addonConfigs ...AddonTestConfiguration) ([]v1beta1.AddonInterface, error) {
 	var testAddons []v1beta1.AddonInterface
 
 	repo, err := local.NewRepository("base", "../addons")
 	if err != nil {
 		return testAddons, err
 	}
-	addons, err := repo.ListAddons()
-	if err != nil {
-		return testAddons, err
-	}
-
-	for _, addon := range addons {
-		for _, name := range names {
-			overrides(addon[0])
-			if addon[0].GetName() == name {
-				if addon[0].GetNamespace() == "" {
-					addon[0].SetNamespace("default")
-				}
-				// TODO - we need to re-org where these filters are done (see: https://jira.mesosphere.com/browse/DCOS-63260)
-				filters(addon[0])
-				testAddons = append(testAddons, addon[0])
-			}
+	for _, addonConfig := range addonConfigs {
+		addon, err := repo.GetAddon(addonConfig.Name)
+		if err != nil {
+			return testAddons, err
 		}
+		overrides(addon[0], addonConfig)
+		if addon[0].GetNamespace() == "" {
+			addon[0].SetNamespace("default")
+		}
+		// TODO - we need to re-org where these filters are done (see: https://jira.mesosphere.com/browse/DCOS-63260)
+		testAddons = append(testAddons, addon[0])
 	}
 
-	if len(testAddons) != len(names) {
-		return testAddons, fmt.Errorf("got %d addons, expected %d", len(testAddons), len(names))
+	if len(testAddons) != len(addonConfigs) {
+		return testAddons, fmt.Errorf("got %d addons, expected %d", len(testAddons), len(addonConfigs))
 	}
 
 	return testAddons, nil
@@ -219,8 +218,8 @@ func findUnhandled() ([]v1beta1.AddonInterface, error) {
 		addon := revisions[0]
 		found := false
 		for _, v := range addonTestingGroups {
-			for _, name := range v {
-				if name == addon.GetName() {
+			for _, addonConfig := range v {
+				if addonConfig.Name == addon.GetName() {
 					found = true
 				}
 			}
@@ -233,34 +232,34 @@ func findUnhandled() ([]v1beta1.AddonInterface, error) {
 	return unhandled, nil
 }
 
-func kubectl(args ...string) error {
-	cmd := exec.Command("kubectl", args...)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
-}
-
-func filters(addon v1beta1.AddonInterface) {
-	switch addon.GetName() {
-	case "cassandra":
-		cassandraParameters := "NODE_COUNT: 1\nNODE_DISK_SIZE_GIB: 1\nPROMETHEUS_EXPORTER_ENABLED: \"false\""
-		addon.GetAddonSpec().KudoReference.Parameters = &cassandraParameters
-	case "kafka":
-		zkuri := fmt.Sprintf("ZOOKEEPER_URI: zookeeper-cs.%s.svc", addon.GetNamespace())
-		addon.GetAddonSpec().KudoReference.Parameters = &zkuri
-	}
-}
-
 // -----------------------------------------------------------------------------
 // Private - CI Values Overrides
 // -----------------------------------------------------------------------------
 
-// TODO: a temporary place to put configuration overrides for addons
-// See: https://jira.mesosphere.com/browse/DCOS-62137
-func overrides(addon v1beta1.AddonInterface) {
-	if v, ok := addonOverrides[addon.GetName()]; ok {
-		addon.GetAddonSpec().ChartReference.Values = &v
+func overrides(addon v1beta1.AddonInterface, config AddonTestConfiguration) {
+	if config.Override != "" {
+		// override helm chart values
+		if addon.GetAddonSpec().ChartReference != nil {
+			addon.GetAddonSpec().ChartReference.Values = &config.Override
+		}
+		//override kudo operator default values
+		if addon.GetAddonSpec().KudoReference != nil {
+			addon.GetAddonSpec().KudoReference.Parameters = &config.Override
+		}
+	}
+
+	for _, toRemove := range config.RemoveDependencies {
+		removeDependencyFromAddon(addon, toRemove)
 	}
 }
 
-var addonOverrides = map[string]string{}
+func removeDependencyFromAddon(addon v1beta1.AddonInterface, toRemove string) {
+	for _, labelSelector := range addon.GetAddonSpec().Requires {
+		for label, value := range labelSelector.MatchLabels {
+			if value == toRemove {
+				delete(labelSelector.MatchLabels, label)
+				return
+			}
+		}
+	}
+}
