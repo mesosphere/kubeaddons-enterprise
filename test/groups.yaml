@@ -48,3 +48,8 @@ cassandra:
     NODE_COUNT: 1
     NODE_DISK_SIZE_GIB: 1
     PROMETHEUS_EXPORTER_ENABLED: "false"
+
+spark:
+- name: "spark"
+  removeDependencies:
+  - prometheus
