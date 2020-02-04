@@ -9,6 +9,7 @@ metadata:
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "0.1.0-1"
     appversion.kubeaddons.mesosphere.io/cassandra: "0.1.2"
+    stage.kubeaddons.io/cassandra: Beta
 spec:
   kubernetes:
     minSupportedVersion: v1.16.0
