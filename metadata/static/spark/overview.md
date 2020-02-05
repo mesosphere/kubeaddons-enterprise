@@ -12,9 +12,7 @@ The KUDO Spark Operator creates, configures, and manages instances of Spark Oper
 - Monitor Spark jobs using pre-configured Grafana dashboards
 - High Availability deployment mode
 - Integration with external batch scheduler (Volcano)
-- Graceful rolling updates for any cluster configuration changes
-- Graceful rolling upgrades when upgrading the operator version
-- External access through LB/Nodeports
+- External access to Spark UI through LB/Nodeports
 
 ## Support Level
 - Mixed workload tested with:
