@@ -53,3 +53,5 @@ spark:
 - name: "spark"
   removeDependencies:
   - prometheus
+  override: |
+    enableMetrics: "false"
