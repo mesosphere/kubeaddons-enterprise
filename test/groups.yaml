@@ -49,6 +49,9 @@ cassandra:
     NODE_DISK_SIZE_GIB: 1
     PROMETHEUS_EXPORTER_ENABLED: "false"
 
+# ------------------------------------------------------------------------------
+# Spark testing group
+# ------------------------------------------------------------------------------
 spark:
 - name: "spark"
   removeDependencies:
