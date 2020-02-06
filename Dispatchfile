@@ -1,0 +1,36 @@
+#!starlark
+
+gitResource("src-git", url="$(context.git.url)", revision="$(context.git.commit)")
+
+def secretVar(name, key):
+    return v1.EnvVarSource(
+        secretKeyRef=v1.SecretKeySelector(
+            localObjectReference=v1.LocalObjectReference(name=name), key=key))
+
+# Environment variables for the build
+env_list = [
+    v1.EnvVar(name="GITHUB_TOKEN", valueFrom=secretVar("github_secret", "token")),
+    v1.EnvVar(name="DOCKER_RANGE", value=172.17.1.1/24)
+]
+
+# The actual test
+task("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
+    name = "KubeAddons ExtraSteps All Tests",
+    image = "mesosphere/kubeaddons-ci:latest",
+    command = ["/bin/sh", "-c"],
+    args = ["""
+            set -euo pipefail;
+            export GIT_TERMINAL_PROMPT=1;
+            export GOPRIVATE=github.com/mesosphere/kubeaddons;
+            git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/";
+            cd test/;
+            go test -race -v;
+            """]
+    workingDir = "/workspace/src-git",
+    env = env_list
+    volumeMounts = [k8s.corev1.VolumeMount(name="buildVolume", mountPath="/var/run/docker.sock")],
+    securityContext = k8s.corev1.SecurityContext(privileged=True)
+)], volumes=[volume("buildVolume", emptyDir=k8s.corev1.EmptyDirVolumeSource())])
+
+# Trigger tests on a push to any branch
+action(tasks = ["test"], on = push(branches = []))
