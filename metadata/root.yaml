@@ -63,3 +63,6 @@ cassandra:
     - type: resources
       title: Documentation
       link: https://github.com/kudobuilder/operators/tree/master/repository/cassandra/3.11
+    - type: support
+      title: Submit a Support Request
+      link: https://d2iq.com/services-and-support
