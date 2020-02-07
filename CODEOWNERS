@@ -1,4 +1,4 @@
-* @joejulian @shaneutt
+* @mesosphere/sig-ksphere-catalog
 
 addons/zookeeper/* @nfnt @zmalik
 addons/kafka/* @nfnt @zmalik
