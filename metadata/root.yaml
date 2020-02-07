@@ -53,7 +53,7 @@ cassandra:
   display_name: Cassandra
   description: Apache Cassandra
   logo: cassandra/logo.svg
-  category: CI/CD
+  category: Data Services
   overview: cassandra/overview.md
   resources:
     provider:
