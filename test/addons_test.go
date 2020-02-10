@@ -12,7 +12,7 @@ import (
 
 	volumetypes "github.com/docker/docker/api/types/volume"
 	docker "github.com/docker/docker/client"
-
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/kind/pkg/apis/config/v1alpha3"
 
 	"github.com/mesosphere/kubeaddons/hack/temp"
@@ -29,9 +29,9 @@ const (
 var addonTestingGroups = make(map[string][]AddonTestConfiguration)
 
 type AddonTestConfiguration struct {
-	Name               string   `json:"name,omitempty" yaml:"name,omitempty"`
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 	// Override the values for helm chart and parameters for kudo operators
-	Override           string   `json:"override,omitempty" yaml:"override,omitempty"`
+	Override string `json:"override,omitempty" yaml:"override,omitempty"`
 	// List of requirements to be removed from the addon
 	RemoveDependencies []string `json:"removeDependencies,omitempty" yaml:"removeDependencies,omitempty"`
 }
@@ -257,15 +257,24 @@ func overrides(addon v1beta1.AddonInterface, config AddonTestConfiguration) {
 	for _, toRemove := range config.RemoveDependencies {
 		removeDependencyFromAddon(addon, toRemove)
 	}
+
 }
 
 func removeDependencyFromAddon(addon v1beta1.AddonInterface, toRemove string) {
-	for _, labelSelector := range addon.GetAddonSpec().Requires {
+	for index, labelSelector := range addon.GetAddonSpec().Requires {
 		for label, value := range labelSelector.MatchLabels {
 			if value == toRemove {
 				delete(labelSelector.MatchLabels, label)
+				if len(labelSelector.MatchLabels) == 0 {
+					addon.GetAddonSpec().Requires = removeLabelsIndex(addon.GetAddonSpec().Requires, index)
+				}
 				return
 			}
+
 		}
 	}
+}
+
+func removeLabelsIndex(s []metav1.LabelSelector, index int) []metav1.LabelSelector {
+	return append(s[:index], s[index+1:]...)
 }
