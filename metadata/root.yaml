@@ -32,6 +32,23 @@ kafka:
       - type: support
         title: Submit a Support Request
         link: https://d2iq.com/services-and-support
+spark:
+  display_name: Spark
+  description: Apache Spark
+  logo: spark/logo.svg
+  category: Data Services
+  overview: spark/overview.md
+  resources:
+    provider:
+      title: Spark
+      link: https://spark.apache.org/
+    links:
+      - type: resources
+        title: Documentation
+        link: https://spark.apache.org/
+      - type: support
+        title: Submit a Support Request
+        link: https://d2iq.com/services-and-support
 zookeeper:
   display_name: Zookeeper
   description: Apache Zookeeper

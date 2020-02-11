@@ -3,3 +3,4 @@
 addons/zookeeper/* @nfnt @zmalik
 addons/kafka/* @nfnt @zmalik
 addons/jenkins/* @takirala @chhsia0
+addons/spark/* @akirillov @alembiewski
