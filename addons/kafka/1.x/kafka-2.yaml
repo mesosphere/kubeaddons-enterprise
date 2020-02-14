@@ -8,7 +8,7 @@ metadata:
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "0.1.0-2"
-    appversion.kubeaddons.mesosphere.io/kafka: "1.2.0"
+    appversion.kubeaddons.mesosphere.io/kafka: "2.4.0"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.0
