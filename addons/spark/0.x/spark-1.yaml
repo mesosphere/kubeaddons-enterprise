@@ -8,7 +8,7 @@ metadata:
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
     stage.kubeaddons.mesosphere.io/spark: Beta
-    catalog.kubeaddons.mesosphere.io/addon-revision: "0.2.0-1"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "2.4.4-1"
     appversion.kubeaddons.mesosphere.io/spark: "2.4.4"
 spec:
   kubernetes:
