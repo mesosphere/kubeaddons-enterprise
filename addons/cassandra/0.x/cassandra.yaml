@@ -7,8 +7,8 @@ metadata:
     kubeaddons.mesosphere.io/name: cassandra
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
-    catalog.kubeaddons.mesosphere.io/addon-revision: "0.1.0-1"
-    appversion.kubeaddons.mesosphere.io/cassandra: "0.1.2"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "3.11.5-1"
+    appversion.kubeaddons.mesosphere.io/cassandra: "3.11.5"
     stage.kubeaddons.io/cassandra: Beta
 spec:
   kubernetes:
