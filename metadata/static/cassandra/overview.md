@@ -3,6 +3,8 @@ The Apache Cassandra database is the right choice when you need scalability and 
 
 The KUDO Cassandra operator creates, configures and manages Apache Cassandra clusters running on Kubernetes.
 
+Learn how to take full advantage of KUDO Cassandra in [docs](https://github.com/kudobuilder/operators/tree/master/repository/cassandra/3.11) available in [operators](https://github.com/kudobuilder/operators) repository
+
 ## Support Level
 This operator is in BETA and not supported yet.
 
