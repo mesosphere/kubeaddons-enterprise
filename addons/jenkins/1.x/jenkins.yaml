@@ -43,6 +43,6 @@ spec:
         jenkinsUriPrefix: "/jenkins"
         ingress:
           enabled: true
-        path: /jenkins
-        annotations:
-          kubernetes.io/ingress.class: traefik
+          path: /jenkins
+          annotations:
+            kubernetes.io/ingress.class: traefik
