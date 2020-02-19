@@ -4,6 +4,8 @@ The KUDO Zookeeper operator creates, configures and manages Apache Zookeeper clu
 - Graceful rolling updates for any cluster configuration changes
 - Graceful rolling upgrades when upgrading the operator version
 
+Learn how to take full advantage of KUDO Zookeeper in [docs](https://github.com/kudobuilder/operators/tree/master/repository/zookeeper) available in [operators](https://github.com/kudobuilder/operators) repository
+
 ## Support Level
 KUDO Zookeeper is only tested with KUDO Kafka 
 
