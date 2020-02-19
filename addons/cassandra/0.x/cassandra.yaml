@@ -2,27 +2,28 @@
 apiVersion: kubeaddons.mesosphere.io/v1beta1
 kind: Addon
 metadata:
-  name: kafka
+  name: cassandra
   labels:
-    kubeaddons.mesosphere.io/name: kafka
+    kubeaddons.mesosphere.io/name: cassandra
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
-    catalog.kubeaddons.mesosphere.io/addon-revision: "0.1.0-1"
-    appversion.kubeaddons.mesosphere.io/kafka: "1.0.0"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "3.11.5-1"
+    appversion.kubeaddons.mesosphere.io/cassandra: "3.11.5"
+    stage.kubeaddons.mesosphere.io/cassandra: Beta
 spec:
   kubernetes:
     minSupportedVersion: v1.16.0
-  requires:
-    - matchLabels:
-        kubeaddons.mesosphere.io/name: zookeeper
   cloudProvider:
     - name: aws
+      enabled: true
+    - name: azure
       enabled: true
     - name: docker
       enabled: true
     - name: none
       enabled: true
   kudoReference:
-    package: kafka
+    package: cassandra
     repo: https://kudo-repository.storage.googleapis.com/0.10.0
-    version: 1.0.0
+    version: 0.1.2
+    appVersion: 3.11.5

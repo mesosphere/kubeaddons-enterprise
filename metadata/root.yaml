@@ -28,7 +28,24 @@ kafka:
     links:
       - type: resources
         title: Documentation
-        link: https://kafka.apache.org/
+        link: https://github.com/kudobuilder/operators/tree/master/repository/kafka
+      - type: support
+        title: Submit a Support Request
+        link: https://d2iq.com/services-and-support
+spark:
+  display_name: Spark
+  description: Apache Spark
+  logo: spark/logo.svg
+  category: Data Services
+  overview: spark/overview.md
+  resources:
+    provider:
+      title: Spark
+      link: https://spark.apache.org/
+    links:
+      - type: resources
+        title: Documentation
+        link: https://spark.apache.org/
       - type: support
         title: Submit a Support Request
         link: https://d2iq.com/services-and-support
@@ -45,7 +62,24 @@ zookeeper:
     links:
       - type: resources
         title: Documentation
-        link: http://zookeeper.apache.org/
+        link: https://github.com/kudobuilder/operators/tree/master/repository/zookeeper
       - type: support
         title: Submit a Support Request
         link: https://d2iq.com/services-and-support
+cassandra:
+  display_name: Cassandra
+  description: Apache Cassandra
+  logo: cassandra/logo.svg
+  category: Data Services
+  overview: cassandra/overview.md
+  resources:
+    provider:
+      title: Cassandra
+      link: http://cassandra.apache.org/
+    links:
+    - type: resources
+      title: Documentation
+      link: https://github.com/kudobuilder/operators/tree/master/repository/cassandra/3.11
+    - type: support
+      title: Submit a Support Request
+      link: https://d2iq.com/services-and-support
