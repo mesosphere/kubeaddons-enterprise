@@ -25,7 +25,7 @@ task("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
             git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/";
             cd test/;
             go test -race -v;
-            """]
+            """],
     workingDir = "/workspace/src-git",
     env = env_list
     volumeMounts = [k8s.corev1.VolumeMount(name="buildVolume", mountPath="/var/run/docker.sock")],
