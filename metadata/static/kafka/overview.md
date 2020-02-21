@@ -11,6 +11,8 @@ The KUDO Kafka operator creates, configures and manages Apache Kafka clusters ru
 - External access through LB/Nodeports
 - Mirror-maker integration
 
+Learn how to take full advantage of KUDO Kafka in [docs](https://github.com/kudobuilder/operators/tree/master/repository/kafka) available in [operators](https://github.com/kudobuilder/operators) repository
+
 ## Support Level
 - Mixed workload tested with 5 brokers, 4096Mib and 2000m each
   - 5Million msgs/sec with avg message size of 60 bytes

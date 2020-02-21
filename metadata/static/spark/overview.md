@@ -14,6 +14,8 @@ The KUDO Spark Operator creates, configures, and manages instances of Spark Oper
 - Integration with external batch scheduler (Volcano)
 - External access to Spark UI through LB/Nodeports
 
+Learn how to take full advantage of KUDO Spark in [docs](https://github.com/kudobuilder/operators/tree/master/repository/spark) available in [operators](https://github.com/kudobuilder/operators) repository
+
 ## Support Level
 - Mixed workload tested with:
   - 50 operators
