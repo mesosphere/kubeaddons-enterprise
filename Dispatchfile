@@ -27,7 +27,7 @@ task("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
             go test -race -v;
             """],
     workingDir = "/workspace/src-git",
-    env = env_list
+    env = env_list,
     volumeMounts = [k8s.corev1.VolumeMount(name="buildVolume", mountPath="/var/run/docker.sock")],
     securityContext = k8s.corev1.SecurityContext(privileged=True)
 )], volumes=[volume("buildVolume", emptyDir=k8s.corev1.EmptyDirVolumeSource())])
