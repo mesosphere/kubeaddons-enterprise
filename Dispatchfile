@@ -19,7 +19,7 @@ task("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
     image = "mesosphere/kubeaddons-ci:latest",
     command = ["/bin/sh", "-c"],
     args = ["""
-            set -euo pipefail;
+            set -eu;
             export GIT_TERMINAL_PROMPT=1;
             export GOPRIVATE=github.com/mesosphere/kubeaddons;
             git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/";
