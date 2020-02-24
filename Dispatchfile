@@ -10,7 +10,7 @@ def secretVar(name, key):
 # Environment variables for the build
 env_list = [
     v1.EnvVar(name="GITHUB_TOKEN", valueFrom=secretVar("github_secret", "token")),
-    v1.EnvVar(name="DOCKER_RANGE", value=172.17.1.1/24)
+    v1.EnvVar(name="DOCKER_RANGE", value="172.17.1.1/24")
 ]
 
 # The actual test
