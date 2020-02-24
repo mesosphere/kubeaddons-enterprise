@@ -24,6 +24,7 @@ task("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
             export GOPRIVATE=github.com/mesosphere/kubeaddons;
             git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/";
             cd test/;
+            echo $(go version);
             go test -race -v;
             """],
     workingDir = "/workspace/src-git",
