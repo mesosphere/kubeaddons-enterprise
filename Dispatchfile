@@ -33,4 +33,4 @@ task("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
 )], volumes=[volume("buildVolume", emptyDir=k8s.corev1.EmptyDirVolumeSource())])
 
 # Trigger tests on a push to any branch
-action(tasks = ["test"], on = push(branches = []))
+action(tasks = ["test"], on = pullRequest())
