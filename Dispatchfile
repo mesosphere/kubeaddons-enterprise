@@ -15,7 +15,7 @@ env_list = [
 
 # The actual test
 task("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
-    name = "KubeAddonsExtraStepsAllTests",
+    name = "kube-addons-extra-steps-all-steps",
     image = "mesosphere/kubeaddons-ci:latest",
     command = ["/bin/sh", "-c"],
     args = ["""
