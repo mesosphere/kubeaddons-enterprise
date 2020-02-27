@@ -13,6 +13,8 @@ The KUDO Spark Operator creates, configures, and manages instances of Spark Oper
 - High Availability deployment mode
 - Integration with external batch scheduler (Volcano)
 - External access to Spark UI through LB/Nodeports
+- Security features: RPC Auth with Encryption, TLS support, Kerberos
+- Additional features for Spark and Spark History Server integration with popular data stores, such as Amazon S3 and HDFS
 
 Learn how to take full advantage of KUDO Spark in [docs](https://github.com/kudobuilder/operators/tree/master/repository/spark) available in [operators](https://github.com/kudobuilder/operators) repository
 
