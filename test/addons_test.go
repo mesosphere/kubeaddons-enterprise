@@ -3,13 +3,11 @@ package test
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"sync"
 	"testing"
 
 	"github.com/blang/semver"
 	"github.com/google/uuid"
-	"gopkg.in/yaml.v2"
 
 	volumetypes "github.com/docker/docker/api/types/volume"
 	docker "github.com/docker/docker/client"
@@ -18,6 +16,8 @@ import (
 
 	"github.com/mesosphere/kubeaddons/hack/temp"
 	"github.com/mesosphere/kubeaddons/pkg/api/v1beta1"
+	"github.com/mesosphere/kubeaddons/pkg/catalog"
+	"github.com/mesosphere/kubeaddons/pkg/repositories"
 	"github.com/mesosphere/kubeaddons/pkg/repositories/local"
 	"github.com/mesosphere/kubeaddons/pkg/test"
 	"github.com/mesosphere/kubeaddons/pkg/test/cluster/kind"
@@ -37,14 +37,40 @@ type AddonTestConfiguration struct {
 	RemoveDependencies []string `json:"removeDependencies,omitempty" yaml:"removeDependencies,omitempty"`
 }
 
+var (
+	cat       catalog.Catalog
+	localRepo repositories.Repository
+	groups    map[string][]v1beta1.AddonInterface
+)
+
 func init() {
-	b, err := ioutil.ReadFile("groups.yaml")
+	var err error
+	localRepo, err = local.NewRepository("local", "../addons/")
 	if err != nil {
 		panic(err)
 	}
 
-	if err := yaml.Unmarshal(b, addonTestingGroups); err != nil {
+	cat, err = catalog.NewCatalog(localRepo)
+	if err != nil {
 		panic(err)
+	}
+
+	groups, err = test.AddonsForGroupsFile("groups.yaml", cat)
+	if err != nil {
+		panic(err)
+	}
+
+	for group, addons := range groups {
+		for _, addon := range addons {
+			overrides := overridesForAddon(addon.GetName())
+			removeDeps := removeDepsForAddon(addon.GetName())
+			cfg := AddonTestConfiguration{
+				Name:               addon.GetName(),
+				Override:           overrides,
+				RemoveDependencies: removeDeps,
+			}
+			addonTestingGroups[group] = append(addonTestingGroups[group], cfg)
+		}
 	}
 }
 
@@ -285,4 +311,47 @@ func removeDependencyFromAddon(addon v1beta1.AddonInterface, toRemove string) {
 
 func removeLabelsIndex(s []metav1.LabelSelector, index int) []metav1.LabelSelector {
 	return append(s[:index], s[index+1:]...)
+}
+
+// TODO currently overrides are hardcoded but will be promoted into test.Groups in the future
+// see D2IQ-64898
+func overridesForAddon(name string) string {
+	switch name {
+	case "kafka":
+		return `ZOOKEEPER_URI: zookeeper-cs
+BROKER_MEM: 32Mi
+BROKER_CPUS: 20m
+BROKER_COUNT: 1
+ADD_SERVICE_MONITOR: false
+`
+	case "cassandra":
+		return `NODE_COUNT: 1
+NODE_DISK_SIZE_GIB: 1
+NODE_MEM_MIB: 128
+PROMETHEUS_EXPORTER_ENABLED: "false"
+`
+	case "spark":
+		return `enableMetrics: "false"`
+	case "zookeeper":
+		return `MEMORY: "32Mi"
+CPUS: 50m
+NODE_COUNT: 1
+`
+	}
+
+	return ""
+}
+
+// TODO currently depremovals are hardcoded but will be promoted into test.Groups in the future
+// see D2IQ-64898
+func removeDepsForAddon(name string) []string {
+	switch name {
+	// remove promethues dependency for CI
+	// https://jira.d2iq.com/browse/D2IQ-63819
+	case "spark":
+		return []string{"prometheus"}
+	case "kafka":
+		return []string{"prometheus"}
+	}
+	return []string{}
 }
