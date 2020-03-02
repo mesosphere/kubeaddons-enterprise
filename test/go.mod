@@ -9,7 +9,7 @@ require (
 	github.com/google/uuid v1.1.1
 	github.com/imdario/mergo v0.3.8 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
-	github.com/mesosphere/kubeaddons v0.9.3
+	github.com/mesosphere/kubeaddons v0.9.7
 	go.uber.org/atomic v1.5.1 // indirect
 	go.uber.org/multierr v1.4.0 // indirect
 	go.uber.org/zap v1.13.0 // indirect
@@ -23,7 +23,7 @@ require (
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/yaml.v2 v2.2.8
 	gopkg.in/yaml.v3 v3.0.0-20200121175148-a6ecf24a6d71
-	k8s.io/apiextensions-apiserver v0.17.2 // indirect
+	k8s.io/apimachinery v0.17.3
 	k8s.io/utils v0.0.0-20200117235808-5f6fbceb4c31 // indirect
 	sigs.k8s.io/kind v0.7.0
 )
