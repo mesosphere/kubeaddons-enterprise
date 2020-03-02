@@ -958,6 +958,8 @@ github.com/mesosphere/kubeaddons v0.9.2 h1:EEFsdIHbsXHhmkpVVJ0DpFmLQg0fBDadv1fKa
 github.com/mesosphere/kubeaddons v0.9.2/go.mod h1:Kur942BJRkOgklkHKIT1yhGpeW5TK5DC1bltrNAxqvw=
 github.com/mesosphere/kubeaddons v0.9.3 h1:ixPO4T1SqpIsm4PJYCl1DOqZDkDv3r0XQ//Mb3Qbgvk=
 github.com/mesosphere/kubeaddons v0.9.3/go.mod h1:4nh0/zyCTagIKB97F8tpYTvblqEI4Bq1w2X46TO4Sx0=
+github.com/mesosphere/kubeaddons v0.9.7 h1:a4rPF6Ib1qxf1to+UuPskQnm5UeHmIitpMtCCH2heCU=
+github.com/mesosphere/kubeaddons v0.9.7/go.mod h1:ZBKFQPqsWS6U8zcwRE+/sKPo3M4nRTU3X4TOhNi70fg=
 github.com/microcosm-cc/bluemonday v1.0.1/go.mod h1:hsXNsILzKxV+sX77C5b8FSuKF00vh2OMYv+xgHpAMF4=
 github.com/microcosm-cc/bluemonday v1.0.2/go.mod h1:iVP4YcDBq+n/5fb23BhYFvIMq/leAFZyRl6bYmGDlGc=
 github.com/mitchellh/copystructure v1.0.0 h1:Laisrj+bAB6b/yJwB5Bt3ITZhGJdqmxquMKeZ+mmkFQ=
