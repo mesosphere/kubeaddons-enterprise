@@ -3,6 +3,8 @@ package test
 import (
 	"context"
 	"fmt"
+	"os"
+	"os/exec"
 	"sync"
 	"testing"
 
@@ -24,6 +26,7 @@ import (
 )
 
 const (
+	controllerBundle         = "https://mesosphere.github.io/kubeaddons/bundle.yaml"
 	defaultKubernetesVersion = "1.16.4"
 )
 
@@ -188,7 +191,7 @@ func testgroup(t *testing.T, groupname string) error {
 	}
 	defer cluster.Cleanup()
 
-	if err := temp.DeployController(cluster, "kind"); err != nil {
+	if err := kubectl("apply", "-f", controllerBundle); err != nil {
 		return err
 	}
 
@@ -354,4 +357,11 @@ func removeDepsForAddon(name string) []string {
 		return []string{"prometheus"}
 	}
 	return []string{}
+}
+
+func kubectl(args ...string) error {
+	cmd := exec.Command("kubectl", args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
 }
