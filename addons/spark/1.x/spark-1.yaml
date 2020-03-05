@@ -7,9 +7,8 @@ metadata:
     kubeaddons.mesosphere.io/name: spark
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
-    stage.kubeaddons.mesosphere.io/spark: Beta
-    catalog.kubeaddons.mesosphere.io/addon-revision: "2.4.4-1"
-    appversion.kubeaddons.mesosphere.io/spark: "2.4.4"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "2.4.5-1"
+    appversion.kubeaddons.mesosphere.io/spark: "2.4.5"
 spec:
   kubernetes:
     minSupportedVersion: v1.15.0
@@ -31,6 +30,6 @@ spec:
   kudoReference:
     package: spark
     repo: https://kudo-repository.storage.googleapis.com/0.10.0
-    version: 0.2.0
+    version: 1.0.0
     parameters: |
       enableMetrics: true

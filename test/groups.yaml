@@ -16,7 +16,7 @@
 # require any dependencies or significant work to deploy.
 # ------------------------------------------------------------------------------
 general:
-- name: "jenkins"
+- "jenkins"
 
 # ------------------------------------------------------------------------------
 # Kafka
@@ -24,37 +24,17 @@ general:
 # All Kafka related addons should be tested as a part of this group
 # ------------------------------------------------------------------------------
 kafka:
-- name: "kafka"
-  # remove promethues dependency for CI
-  # https://jira.d2iq.com/browse/D2IQ-63819
-  removeDependencies:
-    - prometheus
-  override: |
-    ZOOKEEPER_URI: zookeeper-cs
-    BROKER_MEM: 32Mi
-    BROKER_CPUS: 20m
-    ADD_SERVICE_MONITOR: false
-- name: "zookeeper"
-  override: |
-    MEMORY: "32Mi"
-    CPUS: 50m
+- "kafka"
+- "zookeeper"
 
 # ------------------------------------------------------------------------------
 # Cassandra
 # ------------------------------------------------------------------------------
 cassandra:
-- name: "cassandra"
-  override: |
-    NODE_COUNT: 1
-    NODE_DISK_SIZE_GIB: 1
-    PROMETHEUS_EXPORTER_ENABLED: "false"
+- "cassandra"
 
 # ------------------------------------------------------------------------------
 # Spark testing group
 # ------------------------------------------------------------------------------
 spark:
-- name: "spark"
-  removeDependencies:
-  - prometheus
-  override: |
-    enableMetrics: "false"
+- "spark"
