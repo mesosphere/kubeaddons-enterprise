@@ -16,7 +16,7 @@ env_list = [
 # The actual test
 dindTask("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
     name = "kube-addons-extra-steps-all-steps",
-    image = "mesosphere/kubeaddons-ci-dispatch-dind:latest",
+    image = "mesosphere/kubeaddons-ci-dispatch-dind",
     command = ["/bin/sh", "-c"],
     args = ["""
             set -eu;
