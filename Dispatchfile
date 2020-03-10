@@ -29,8 +29,7 @@ dindTask("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
             """],
     workingDir = "/workspace/src-git",
     env = env_list,
-    volumeMounts = [k8s.corev1.VolumeMount(name="build-volume", mountPath="/var/run/docker.sock")],
-    securityContext = k8s.corev1.SecurityContext(privileged=True)
+    volumeMounts = [k8s.corev1.VolumeMount(name="build-volume", mountPath="/var/run/docker.sock")]
 )], volumes=[volume("build-volume", emptyDir=k8s.corev1.EmptyDirVolumeSource())])
 
 # Trigger tests on a push to any branch
