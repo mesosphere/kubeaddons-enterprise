@@ -28,9 +28,7 @@ dindTask("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
             go test -race -v;
             """],
     workingDir = "/workspace/src-git",
-    env = env_list,
-    volumeMounts = [k8s.corev1.VolumeMount(name="build-volume", mountPath="/var/run/docker.sock")]
-)], volumes=[volume("build-volume", emptyDir=k8s.corev1.EmptyDirVolumeSource())])
+    env = env_list)
 
 # Trigger tests on a push to any branch
 action(tasks = ["test"], on = pullRequest())
