@@ -28,7 +28,7 @@ dindTask("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
             go test -race -v;
             """],
     workingDir = "/workspace/src-git",
-    env = env_list)
+    env = env_list])
 
 # Trigger tests on a push to any branch
 action(tasks = ["test"], on = pullRequest())
