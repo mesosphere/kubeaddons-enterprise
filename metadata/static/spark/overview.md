@@ -18,6 +18,11 @@ The KUDO Spark Operator creates, configures, and manages instances of Spark Oper
 
 Learn how to take full advantage of KUDO Spark in [docs](https://github.com/kudobuilder/operators/tree/master/repository/spark) available in [operators](https://github.com/kudobuilder/operators) repository
 
+## Dependencies
+
+Spark addon requires previous installation of:
+- Prometheus operator
+
 ## Support Level
 - Mixed workload tested with:
   - 50 operators
