@@ -16,9 +16,9 @@ env_list = [
 # The actual test
 dindTask("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
     name = "kube-addons-extra-steps-all-steps",
-    image = "mesosphere/kubeaddons-ci:Dispatch",
-    command = ["/bin/sh", "-c"],
-    args = ["""
+    image = "mesosphere/kubeaddons-ci:Dispatch"
+    args = ["/bin/sh", "-c", 
+            """
             set -eu;
             export GIT_TERMINAL_PROMPT=1;
             export GOPRIVATE=github.com/mesosphere/kubeaddons;
