@@ -22,6 +22,7 @@ import (
 	"github.com/mesosphere/kubeaddons/pkg/repositories/local"
 	"github.com/mesosphere/kubeaddons/pkg/test"
 	"github.com/mesosphere/kubeaddons/pkg/test/cluster/kind"
+	"github.com/mesosphere/kubeaddons/pkg/test/loadable"
 )
 
 const (
@@ -199,18 +200,32 @@ func testgroup(t *testing.T, groupname string) error {
 		return err
 	}
 
-	ph, err := test.NewBasicTestHarness(t, cluster, addons...)
-	if err != nil {
-		return err
-	}
-	defer ph.Cleanup()
-
 	wg := &sync.WaitGroup{}
 	stop := make(chan struct{})
 	go test.LoggingHook(t, cluster, wg, stop)
 
-	ph.Validate()
-	ph.Deploy()
+	deployplan, err := loadable.DeployAddons(t, cluster, addons...)
+	if err != nil {
+		return err
+	}
+
+	defaultplan, err := loadable.WaitForAddons(t, cluster, addons...)
+	if err != nil {
+		return err
+	}
+
+	cleanupplan, err := loadable.CleanupAddons(t, cluster, addons...)
+	if err != nil {
+		return err
+	}
+
+	th := test.NewSimpleTestHarness(t)
+	th.Load(loadable.ValidateAddons(addons...), deployplan, defaultplan, cleanupplan)
+
+	defer th.Cleanup()
+	th.Validate()
+	th.Deploy()
+	th.Default()
 
 	close(stop)
 	wg.Wait()
