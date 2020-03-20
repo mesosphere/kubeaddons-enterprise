@@ -32,3 +32,4 @@ dindTask("test", inputs = ["src-git"], steps = [k8s.corev1.Container(
 
 # Trigger tests on a push to any branch
 action(tasks = ["test"], on = pullRequest())
+
