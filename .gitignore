@@ -1,0 +1,4 @@
+kubeconfig
+bin/
+dist/
+kind-logs-*/
