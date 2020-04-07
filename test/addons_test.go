@@ -9,20 +9,19 @@ import (
 	"testing"
 
 	"github.com/blang/semver"
-	"github.com/google/uuid"
-
 	volumetypes "github.com/docker/docker/api/types/volume"
 	docker "github.com/docker/docker/client"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"sigs.k8s.io/kind/pkg/apis/config/v1alpha3"
-
+	"github.com/google/uuid"
+	"github.com/mesosphere/ksphere-testing-framework/pkg/cluster/kind"
+	"github.com/mesosphere/ksphere-testing-framework/pkg/experimental"
+	testharness "github.com/mesosphere/ksphere-testing-framework/pkg/harness"
 	"github.com/mesosphere/kubeaddons/pkg/api/v1beta1"
 	"github.com/mesosphere/kubeaddons/pkg/catalog"
 	"github.com/mesosphere/kubeaddons/pkg/repositories"
 	"github.com/mesosphere/kubeaddons/pkg/repositories/local"
-	"github.com/mesosphere/kubeaddons/pkg/test"
-	"github.com/mesosphere/kubeaddons/pkg/test/cluster/kind"
-	"github.com/mesosphere/kubeaddons/pkg/test/loadable"
+	addontesters "github.com/mesosphere/kubeaddons/test/utils"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"sigs.k8s.io/kind/pkg/apis/config/v1alpha3"
 )
 
 const (
@@ -58,7 +57,7 @@ func init() {
 		panic(err)
 	}
 
-	groups, err = test.AddonsForGroupsFile("groups.yaml", cat)
+	groups, err = experimental.AddonsForGroupsFile("groups.yaml", cat)
 	if err != nil {
 		panic(err)
 	}
@@ -202,25 +201,25 @@ func testgroup(t *testing.T, groupname string) error {
 
 	wg := &sync.WaitGroup{}
 	stop := make(chan struct{})
-	go test.LoggingHook(t, cluster, wg, stop)
+	go experimental.LoggingHook(t, cluster, wg, stop)
 
-	deployplan, err := loadable.DeployAddons(t, cluster, addons...)
+	deployplan, err := addontesters.DeployAddons(t, cluster, addons...)
 	if err != nil {
 		return err
 	}
 
-	defaultplan, err := loadable.WaitForAddons(t, cluster, addons...)
+	defaultplan, err := addontesters.WaitForAddons(t, cluster, addons...)
 	if err != nil {
 		return err
 	}
 
-	cleanupplan, err := loadable.CleanupAddons(t, cluster, addons...)
+	cleanupplan, err := addontesters.CleanupAddons(t, cluster, addons...)
 	if err != nil {
 		return err
 	}
 
-	th := test.NewSimpleTestHarness(t)
-	th.Load(loadable.ValidateAddons(addons...), deployplan, defaultplan, cleanupplan)
+	th := testharness.NewSimpleTestHarness(t)
+	th.Load(addontesters.ValidateAddons(addons...), deployplan, defaultplan, cleanupplan)
 
 	defer th.Cleanup()
 	th.Validate()
@@ -330,7 +329,7 @@ func removeLabelsIndex(s []metav1.LabelSelector, index int) []metav1.LabelSelect
 	return append(s[:index], s[index+1:]...)
 }
 
-// TODO currently overrides are hardcoded but will be promoted into test.Groups in the future
+// TODO currently overrides are hardcoded but will be promoted into Groups in the future
 // see D2IQ-64898
 func overridesForAddon(name string) string {
 	switch name {
@@ -359,7 +358,7 @@ NODE_COUNT: 1
 	return ""
 }
 
-// TODO currently depremovals are hardcoded but will be promoted into test.Groups in the future
+// TODO currently depremovals are hardcoded but will be promoted into Groups in the future
 // see D2IQ-64898
 func removeDepsForAddon(name string) []string {
 	switch name {
