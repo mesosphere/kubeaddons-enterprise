@@ -1,0 +1,35 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: spark
+  labels:
+    kubeaddons.mesosphere.io/name: spark
+    kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
+  annotations:
+    catalog.kubeaddons.mesosphere.io/addon-revision: "2.4.5-1"
+    appversion.kubeaddons.mesosphere.io/spark: "2.4.5"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.15.0
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: azure
+      enabled: true
+    - name: gcp
+      enabled: true
+    - name: docker
+      enabled: true
+    - name: none
+      enabled: true
+  requires:
+    - matchLabels:
+        # requires ServiceMonitor CRD to be present
+        kubeaddons.mesosphere.io/name: prometheus
+  kudoReference:
+    package: spark
+    repo: https://kudo-repository.storage.googleapis.com/0.10.0
+    version: 1.0.0
+    parameters: |
+      enableMetrics: true
