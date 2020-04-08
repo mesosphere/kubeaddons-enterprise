@@ -7,9 +7,10 @@ metadata:
     kubeaddons.mesosphere.io/name: cassandra
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
-    catalog.kubeaddons.mesosphere.io/addon-revision: "3.11.5-1"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "3.11.5-2"
     appversion.kubeaddons.mesosphere.io/cassandra: "3.11.5"
     stage.kubeaddons.mesosphere.io/cassandra: Beta
+    catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/kudobuilder/operators/master/repository/cassandra/3.11/operator/params.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.0
