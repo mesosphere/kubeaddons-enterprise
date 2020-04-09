@@ -23,7 +23,7 @@ require (
 	golang.org/x/tools v0.0.0-20200122042241-dc16b66866f1 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20200121175148-a6ecf24a6d71 // indirect
-	k8s.io/apimachinery v0.17.4
+	k8s.io/apimachinery v0.18.1
 	k8s.io/utils v0.0.0-20200117235808-5f6fbceb4c31 // indirect
 	sigs.k8s.io/kind v0.7.0
 )
