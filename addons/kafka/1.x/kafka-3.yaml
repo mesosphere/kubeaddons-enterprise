@@ -1,0 +1,39 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: kafka
+  labels:
+    kubeaddons.mesosphere.io/name: kafka
+    kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
+  annotations:
+    catalog.kubeaddons.mesosphere.io/addon-revision: "2.4.0-3"
+    appversion.kubeaddons.mesosphere.io/kafka: "2.4.0"
+    catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/kudobuilder/operators/master/repository/kafka/operator/params.yaml"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.16.0
+  requires:
+    - matchLabels:
+        kubeaddons.mesosphere.io/name: zookeeper
+    - matchLabels:
+        # requires servicemonitors.monitoring.coreos.com CRD to be present
+        kubeaddons.mesosphere.io/name: prometheus
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: docker
+      enabled: true
+    - name: none
+      enabled: true
+  kudoReference:
+    package: kafka
+    repo: https://kudo-repository.storage.googleapis.com/0.10.0
+    version: 1.2.0
+    parameters: |
+      ZOOKEEPER_URI: zookeeper-zookeeper-0.zookeeper-hs:2181,zookeeper-zookeeper-1.zookeeper-hs:2181,zookeeper-zookeeper-2.zookeeper-hs:2181
+      # KUDO Kafka requires KUDO Zookeeper to be installed previously
+      # set the correct ZOOKEEPER_URI based on zookeeper service name
+      # e.g. for a zookeeper service with name 'zk1' and of 3 zk nodes the correct URI would be
+      # zk1-zookeeper-0.zk1-hs:2181,zk1-zookeeper-1.zk1-hs:2181,zk1-zookeeper-2.zk1-hs:2181
+      ADD_SERVICE_MONITOR: true
