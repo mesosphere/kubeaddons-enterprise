@@ -15,6 +15,9 @@ jenkins:
       - type: support
         title: Submit a Support Request
         link: https://d2iq.com/services-and-support
+generic-application-operator:
+  display_name: Custom Platform Service
+  category: General
 kafka:
   display_name: Kafka
   description: Apache Kafka
