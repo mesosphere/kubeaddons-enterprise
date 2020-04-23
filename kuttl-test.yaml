@@ -5,6 +5,11 @@ manifestDirs:
 commands:
   - command: kubectl apply -f https://mesosphere.github.io/kubeaddons/bundle.yaml
 testDirs:
-  - ./addons/zookeeper/0.x/
+  - ./addons/cassandra/tests
+  - ./addons/jenkins/tests
+  - ./addons/kafka/tests
+  - ./addons/spark/tests
+  - ./addons/zookeeper/tests
 startKIND: true
 timeout: 300
+parallel: 2

@@ -1,0 +1,14 @@
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: cassandra
+spec:
+  kudoReference:
+    package: cassandra
+    repo: https://kudo-repository.storage.googleapis.com/0.10.0
+    version: 0.1.2
+    parameters: |
+      NODE_COUNT: 1
+      NODE_DISK_SIZE_GIB: 1
+      NODE_MEM_MIB: 128
+      PROMETHEUS_EXPORTER_ENABLED: "false"

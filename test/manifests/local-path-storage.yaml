@@ -99,7 +99,6 @@ kind: StorageClass
 metadata:
   name: local-path
   annotations:
-    storageclass.beta.kubernetes.io/is-default-class: "true"
     storageclass.kubernetes.io/is-default-class: "true"
 provisioner: rancher.io/local-path
 volumeBindingMode: WaitForFirstConsumer

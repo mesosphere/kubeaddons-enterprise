@@ -2,7 +2,6 @@ apiVersion: kudo.dev/v1beta1
 kind: Instance
 metadata:
   name: zookeeper
-  namespace: default
 status:
   aggregatedStatus:
     status: COMPLETE
@@ -11,11 +10,5 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: zookeeper-zookeeper
-  namespace: default
-spec:
-  template:
-    spec:
-     containers:
-     - name: kubernetes-zookeeper
 status:
-  readyReplicas: 3
+  readyReplicas: 1

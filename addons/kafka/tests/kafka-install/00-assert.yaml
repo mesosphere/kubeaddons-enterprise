@@ -1,0 +1,23 @@
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: zookeeper
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: kafka
+---
+apiVersion: kudo.dev/v1beta1
+kind: OperatorVersion
+spec:
+  operator:
+    kind: Operator
+    name: kafka
+---
+apiVersion: kudo.dev/v1beta1
+kind: OperatorVersion
+spec:
+  operator:
+    kind: Operator
+    name: zookeeper
