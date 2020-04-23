@@ -2,10 +2,3 @@ apiVersion: kubeaddons.mesosphere.io/v1beta1
 kind: Addon
 metadata:
   name: spark
----
-apiVersion: kudo.dev/v1beta1
-kind: OperatorVersion
-spec:
-  operator:
-    kind: Operator
-    name: spark

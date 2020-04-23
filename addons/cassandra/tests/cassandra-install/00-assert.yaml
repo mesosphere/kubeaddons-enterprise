@@ -7,8 +7,3 @@ apiVersion: kudo.dev/v1beta1
 kind: Instance
 metadata:
   name: cassandra
----
-apiVersion: kudo.dev/v1beta1
-kind: OperatorVersion
-metadata:
-  name: cassandra-0.1.2
