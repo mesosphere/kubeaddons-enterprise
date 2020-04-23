@@ -4,9 +4,6 @@ metadata:
   name: zookeeper
 spec:
   kudoReference:
-    package: zookeeper
-    repo: https://kudo-repository.storage.googleapis.com/0.10.0
-    version: zookeeper-0.3.0
     parameters: |
       NODE_COUNT: 1
       MEMORY: "32Mi"

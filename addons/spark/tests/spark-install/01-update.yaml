@@ -5,8 +5,5 @@ metadata:
 spec:
   requires:
   kudoReference:
-    package: spark
-    repo: https://kudo-repository.storage.googleapis.com/0.10.0
-    version: spark-1.0.0
     parameters: |
       enableMetrics: false

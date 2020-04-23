@@ -12,4 +12,4 @@ testDirs:
   - ./addons/zookeeper/tests
 startKIND: true
 timeout: 300
-parallel: 2
+parallel: 3

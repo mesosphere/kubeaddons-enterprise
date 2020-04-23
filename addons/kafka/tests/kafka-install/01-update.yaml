@@ -16,9 +16,6 @@ spec:
     - matchLabels:
         kubeaddons.mesosphere.io/name: zookeeper
   kudoReference:
-    package: kafka
-    repo: https://kudo-repository.storage.googleapis.com/0.10.0
-    version: kafka-1.2.0
     parameters: |
       ZOOKEEPER_URI: zookeeper-zookeeper-0.zookeeper-hs:2181,zookeeper-zookeeper-1.zookeeper-hs:2181,zookeeper-zookeeper-2.zookeeper-hs:2181
       ADD_SERVICE_MONITOR: false
