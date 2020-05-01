@@ -135,6 +135,7 @@ github.com/ghodss/yaml v0.0.0-20150909031657-73d445a93680/go.mod h1:4dBDuWmgqj2H
 github.com/ghodss/yaml v0.0.0-20180820084758-c7ce16629ff4/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/ghodss/yaml v1.0.0 h1:wQHKEahhL6wmXdzwWG11gIVCkOv05bNOh+Rxn0yngAk=
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
+github.com/ghodss/yaml v1.0.1-0.20180820084758-c7ce16629ff4/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/gliderlabs/ssh v0.2.2 h1:6zsha5zo/TWhRhwqCD3+EarCAgZ2yN28ipRnGPnwkI0=
 github.com/gliderlabs/ssh v0.2.2/go.mod h1:U7qILu1NlMHj9FlMhZLlkCdDnU1DBEAqr0aevW3Awn0=
 github.com/globalsign/mgo v0.0.0-20180905125535-1ca0a4f7cbcb/go.mod h1:xkRDCp4j0OGD1HRkm4kmhM+pmpv3AKq5SU7GMg4oO/Q=
@@ -324,6 +325,8 @@ github.com/kudobuilder/kudo v0.10.1 h1:r/ibIChYMbEDSblWQ9tLyMIFiyBTnw6zfMpIkv+1V
 github.com/kudobuilder/kudo v0.10.1/go.mod h1:jUkyWjVbgSPZBvYXALvOO5ydeIG+azsDnR2ZP1V8dQE=
 github.com/kudobuilder/kudo v0.11.0/go.mod h1:990VBv0+bWl92ZJXVrdnmgwWStkZ4tD8kOYcskIsMbE=
 github.com/kudobuilder/kudo v0.11.1/go.mod h1:iBsOEGm11oNsVNAyhLSYfXGKI/vqyTl3z7k8T5twKqQ=
+github.com/kudobuilder/kudo v0.12.0/go.mod h1:S6J9ds4CTmj6dQpfw8x2DlAKaNo9dWI2rplc3Q+4IU0=
+github.com/kudobuilder/kuttl v0.1.0/go.mod h1:XH4r1WLh7rzZ4ECv9QIyxJm5AY8UqnsTZRz2RSarTRc=
 github.com/liggitt/tabwriter v0.0.0-20181228230101-89fcab3d43de h1:9TO3cAIGXtEhnIaL+V+BEER86oLrvS+kWobKpbJuye0=
 github.com/liggitt/tabwriter v0.0.0-20181228230101-89fcab3d43de/go.mod h1:zAbeS9B/r2mtpb6U+EI2rYA5OAXxsYw6wTamcNW+zcE=
 github.com/lithammer/dedent v1.1.0/go.mod h1:jrXYCQtgg0nJiN+StA2KgR7w6CiQNv9Fd/Z9BP0jIOc=
@@ -352,6 +355,7 @@ github.com/matttproud/golang_protobuf_extensions v1.0.1/go.mod h1:D8He9yQNgCq6Z5
 github.com/mesosphere/ksphere-testing-framework v0.0.0-20200320191913-4ed3ad40a337/go.mod h1:AEDOa+sY+rrGcsJ+G2IwNnYFaxg7dmfMW39qdl3C9IQ=
 github.com/mesosphere/ksphere-testing-framework v0.0.0-20200320204306-f29e7880920f h1:6ps3OUnUkiN1Z4iEu41dYvuUJtWOs5B2EgE1vqi8cUY=
 github.com/mesosphere/ksphere-testing-framework v0.0.0-20200320204306-f29e7880920f/go.mod h1:AEDOa+sY+rrGcsJ+G2IwNnYFaxg7dmfMW39qdl3C9IQ=
+github.com/mesosphere/ksphere-testing-framework v0.0.0-20200409132906-872edbff4e7a/go.mod h1:0i/HsNkjOp9ic69XWXsuQtJjiJrx8Vwu7hFljyCcfHk=
 github.com/mesosphere/kubeaddons v0.10.2 h1:heURHF0srnA/UmNvgdMS+5+2Kh6rwMzEiapUGKy/24c=
 github.com/mesosphere/kubeaddons v0.10.2/go.mod h1:6TEL+jD4yW324GCF+aaIXNmBBgeeaF636DAi43OJffo=
 github.com/mesosphere/kubeaddons v0.11.0 h1:p2ZApkjMRRljVZN7/NzhUnRLGuZJV9Y620ooU9EgHhs=
@@ -360,6 +364,8 @@ github.com/mesosphere/kubeaddons v0.12.1 h1:9pmKG9fBdRMGoBdQVz2y3apGM6+W/7sh/x4r
 github.com/mesosphere/kubeaddons v0.12.1/go.mod h1:b5mMrW49yZgqLXY8rasRPk9tZ9dHpRnzDnVJK/g2I6Y=
 github.com/mesosphere/kubeaddons v0.13.0 h1:Dzmw3sc+kOHHHw5buC4DYw/efchsINvbuMH3zFcErIA=
 github.com/mesosphere/kubeaddons v0.13.0/go.mod h1:oRjEgw8tm9bozJZahB6NKFdbUTm1nehkIFqMJPk8rUw=
+github.com/mesosphere/kubeaddons v0.14.0 h1:Rj0ZE1ISYquTM8ZRQwtBB9qCIx9AwnpQmbzWDXIE7ps=
+github.com/mesosphere/kubeaddons v0.14.0/go.mod h1:xcvT9hS3koJF6vvSSgeTkr22T9B8oX4q1qQeT8Qsxo0=
 github.com/mitchellh/copystructure v1.0.0 h1:Laisrj+bAB6b/yJwB5Bt3ITZhGJdqmxquMKeZ+mmkFQ=
 github.com/mitchellh/copystructure v1.0.0/go.mod h1:SNtv71yrdKgLRyLFxmLdkAbkKEFWgYaq1OVrnRcwhnw=
 github.com/mitchellh/go-homedir v1.1.0 h1:lukF9ziXFxDFPkA1vsr5zpc1XuPDn/wFntq5mG+4E0Y=
@@ -803,6 +809,7 @@ k8s.io/gengo v0.0.0-20190822140433-26a664648505/go.mod h1:ezvh/TsK7cY6rbqRK0oQQ8
 k8s.io/helm v2.16.3+incompatible h1:MGUcXcG1uAXWZmxu4vzzgRjZOnfFUsSJbHgqM+kyqzM=
 k8s.io/helm v2.16.3+incompatible/go.mod h1:LZzlS4LQBHfciFOurYBFkCMTaZ0D1l+p0teMg7TSULI=
 k8s.io/helm v2.16.5+incompatible/go.mod h1:LZzlS4LQBHfciFOurYBFkCMTaZ0D1l+p0teMg7TSULI=
+k8s.io/helm v2.16.6+incompatible/go.mod h1:LZzlS4LQBHfciFOurYBFkCMTaZ0D1l+p0teMg7TSULI=
 k8s.io/klog v0.0.0-20181102134211-b9b56d5dfc92/go.mod h1:Gq+BEi5rUBO/HRz0bTSXDUcqjScdoY3a9IHpCEIOOfk=
 k8s.io/klog v0.3.0/go.mod h1:Gq+BEi5rUBO/HRz0bTSXDUcqjScdoY3a9IHpCEIOOfk=
 k8s.io/klog v0.4.0/go.mod h1:4Bi6QPql/J/LkTDqv7R/cd3hPo4k2DG6Ptcz060Ez5I=
