@@ -11,5 +11,5 @@ testDirs:
   - ./addons/spark/tests
   - ./addons/zookeeper/tests
 startKIND: true
-timeout: 300
-parallel: 3
+timeout: 500
+parallel: 2
