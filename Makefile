@@ -1,5 +1,6 @@
 KUTTL_VERSION=0.1.0
 KIND_VERSION=0.8.1
+KUBERNETES_VERSION ?= 1.17.5
 
 OS=$(shell uname -s | tr '[:upper:]' '[:lower:]')
 MACHINE=$(shell uname -m)
@@ -30,7 +31,7 @@ install-kuttl: bin/kind_$(KIND_VERSION) bin/kubectl-kuttl_$(KUTTL_VERSION)
 
 .PHONY: create-kind-cluster
 create-kind-cluster:
-	./bin/kind create cluster
+	./bin/kind create cluster --wait 10s --config=test/kind/$(KUBERNETES_VERSION).yaml
 
 .PHONY: kind-test
 kind-test: install-kuttl create-kind-cluster
