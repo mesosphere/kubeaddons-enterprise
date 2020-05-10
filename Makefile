@@ -41,7 +41,7 @@ $(KUBECONFIG): install-bin
 	bin/kind create cluster --wait 10s --config=test/kind/$(KUBERNETES_VERSION).yaml
 
 .PHONY: kind-test
-kind-test: install-kuttl create-kind-cluster
+kind-test: create-kind-cluster
 	go get github.com/jstemmer/go-junit-report
 	mkdir -p dist
 	kubectl kuttl test --artifacts-dir=$(ARTIFACTS) 2>&1 |tee /dev/fd/2 | go-junit-report -set-exit-code > dist/addons_test_report.xml
