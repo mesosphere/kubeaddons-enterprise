@@ -1,0 +1,14 @@
+apiVersion: kudo.dev/v1beta1
+kind: Instance
+metadata:
+  name: zookeeper
+status:
+  aggregatedStatus:
+    status: COMPLETE
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zookeeper-zookeeper
+status:
+  readyReplicas: 1
