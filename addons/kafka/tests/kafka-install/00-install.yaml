@@ -1,7 +1,0 @@
-apiVersion: kudo.dev/v1beta1
-kind: TestStep
-commands:
-  - command: kubectl apply -f ./../../../zookeeper/0.x/zookeeper-3.yaml
-    namespaced: true
-  - command: kubectl apply -f ../../1.x/kafka-3.yaml
-    namespaced: true
