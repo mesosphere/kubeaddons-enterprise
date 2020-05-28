@@ -1,0 +1,5 @@
+apiVersion: kudo.dev/v1beta1
+kind: TestStep
+commands:
+  - command: kubectl apply -f ../../../addons/spark/1.x/spark-2.yaml
+    namespaced: true

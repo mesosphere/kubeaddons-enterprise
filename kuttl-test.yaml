@@ -3,11 +3,11 @@ kind: TestSuite
 commands:
   - command: kubectl apply -f https://mesosphere.github.io/kubeaddons/bundle.yaml
 testDirs:
-  - ./addons/cassandra/tests
-  - ./addons/jenkins/tests
-  - ./addons/kafka/tests
-  - ./addons/spark/tests
-  - ./addons/zookeeper/tests
+  - ./tests/cassandra/
+  - ./tests/spark/
+  - ./tests/kafka/
+  - ./tests/zookeeper/
+  - ./tests/jenkins/
 startKIND: false
 timeout: 500
 parallel: 2

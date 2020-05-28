@@ -1,0 +1,9 @@
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: spark
+spec:
+  requires:
+  kudoReference:
+    parameters: |
+      enableMetrics: false
