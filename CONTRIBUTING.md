@@ -11,10 +11,12 @@ For example for jenkins with have this test step:
 apiVersion: kudo.dev/v1beta1
 kind: TestStep
 commands:
-  - command: kubectl apply -f ../../1.x/jenkins.yaml
+  - command: kubectl apply -f ../../../addons/jenkins/1.x/jenkins.yaml
     namespaced: true
 ```
 
 if `jenkins` is bumped to `jenkins-2.yaml` or `2.x/jenkins.yaml`, we will need to bump also in the tests.
 
 Once we can make sure that we always test the latest version of addons, this requirement will be removed.
+
+You can read more around testing structure in [testing documentation](./tests/README.md).

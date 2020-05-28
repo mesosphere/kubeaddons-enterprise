@@ -1,0 +1,5 @@
+apiVersion: kudo.dev/v1beta1
+kind: TestStep
+commands:
+  - command: kubectl apply -f ../../../addons/jenkins/1.x/jenkins.yaml
+    namespaced: true

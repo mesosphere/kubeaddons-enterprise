@@ -1,0 +1,9 @@
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: cassandra
+---
+apiVersion: kudo.dev/v1beta1
+kind: Instance
+metadata:
+  name: cassandra
