@@ -1,9 +1,0 @@
-apiVersion: kubeaddons.mesosphere.io/v1beta1
-kind: Addon
-metadata:
-  name: zookeeper
-spec:
-  kudoReference:
-    parameters: |
-      NODE_COUNT: 1
-      MEMORY: "32Mi"
