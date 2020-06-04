@@ -9,11 +9,14 @@ metadata:
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "3.11.6-1"
     appversion.kubeaddons.mesosphere.io/cassandra: "3.11.6"
-    stage.kubeaddons.mesosphere.io/cassandra: Beta
     catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/kudobuilder/operators/master/repository/cassandra/3.11/operator/params.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.0
+  requires:
+    - matchLabels:
+        # requires servicemonitors.monitoring.coreos.com CRD to be present
+        kubeaddons.mesosphere.io/name: prometheus
   cloudProvider:
     - name: aws
       enabled: true
