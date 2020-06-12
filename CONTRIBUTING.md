@@ -18,3 +18,8 @@ commands:
 if `jenkins` is bumped to `jenkins-2.yaml` or `2.x/jenkins.yaml`, we will need to bump also in the tests.
 
 Once we can make sure that we always test the latest version of addons, this requirement will be removed.
+
+## Adding tests
+
+The tests for this repository live in [kubeaddons-enterprise-tests](https://github.com/mesosphere/kubeaddons-enterprise-tests) repo.
+Any new addon that doesn't provide tests will make the CI fail. Please read [adding-tests](https://github.com/mesosphere/kubeaddons-enterprise-tests#adding-tests) documentation in [kubeaddons-enterprise-tests](https://github.com/mesosphere/kubeaddons-enterprise-tests) repo.

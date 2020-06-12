@@ -3,3 +3,6 @@ bin/
 dist/
 kind-logs-*/
 **/*.kube/
+/kubeaddons-enterprise-tests
+go.mod
+go.sum
