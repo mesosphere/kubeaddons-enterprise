@@ -21,7 +21,8 @@ Pull Requests of feature branches should be opened against the `dev` branch.
 
 ### Staging Update (Second and Forth Thursday)
 
-On the second and forth _**Thursday**_, the `staging` should be updated. By setting `staging` branch to the head of `dev` and force-pushing.
+On the second and forth _**Thursday**_, the `staging` should be updated. By merging `dev` into `staging` branch.
+
 
 Verify in AWS Soak cluster, the workspace of `kudo-testing` 
 
