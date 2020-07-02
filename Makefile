@@ -1,4 +1,4 @@
-KUTTL_VERSION=0.4.0
+KUTTL_VERSION=0.5.0
 KIND_VERSION=0.8.1
 KUBERNETES_VERSION ?= 1.17.5
 KUBECONFIG=kubeconfig
@@ -36,19 +36,17 @@ install-bin: bin/kind bin/kubectl-kuttl
 .PHONY: create-kind-cluster
 create-kind-cluster: $(KUBECONFIG)
 
+kubeaddons-tests:
+	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
+
 $(KUBECONFIG): install-bin
-	git clone --depth 1 https://github.com/mesosphere/kubeaddons-enterprise-tests.git --branch master --single-branch
 	bin/kind create cluster --wait 10s --image=kindest/node:v$(KUBERNETES_VERSION)
 
 .PHONY: kind-test
-kind-test: create-kind-cluster
-	kubeaddons-enterprise-tests/run-tests.sh
-	bin/kind delete cluster
-	rm $(KUBECONFIG)
+kind-test: kubeaddons-tests create-kind-cluster
+	kubeaddons-tests/run-tests.sh
 
 .PHONY: clean
 clean:
 	bin/kind delete cluster
-	rm -rf kubeaddons-enterprise-tests
-	rm -f go.mod
-	rm -f go.sum
+	rm -rf kubeaddons-tests
