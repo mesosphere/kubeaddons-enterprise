@@ -3,3 +3,4 @@ bin/
 dist/
 kind-logs-*/
 **/*.kube/
+/kubeaddons-tests
