@@ -6,7 +6,10 @@ The KUDO Cassandra operator creates, configures and manages Apache Cassandra clu
 Learn how to take full advantage of KUDO Cassandra in [docs](https://github.com/kudobuilder/operators/tree/master/repository/cassandra/3.11) available in [operators](https://github.com/kudobuilder/operators) repository
 
 ## Support Level
-This operator is in BETA and not supported yet.
+- Mixed workload tested
+  - 4 DCs * 33 nodes (132 nodes total) 684K writes/sec with RF 3 in each DC (total 2.7M writes / sec) 
+  - 1 DCs * 30 nodes (30 nodes total) 1.2M writes/sec with RF 1  
+- Base tech support
 
 ## License
 [Apache License 2.0](https://github.com/kudobuilder/operators/blob/master/LICENSE)
