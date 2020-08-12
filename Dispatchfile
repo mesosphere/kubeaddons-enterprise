@@ -1,0 +1,54 @@
+#!mesosphere/dispatch-starlark:v0.6
+# vi:syntax=python
+
+load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.4", "gitResource", "pullRequest", "push", "volume", "resourceVar", "secretVar")
+load("github.com/mesosphere/cluster-claim-controller/starlark/claim@master", "make_kind_cluster", "fetch_kubeconfig", "cleanup")
+
+
+git = "src-git"
+gitResource(git, url="$(context.git.url)", revision="$(context.git.commit)")
+
+cluster_name = "kubeaddons"
+kind_cluster=make_kind_cluster(cluster_name, git)
+
+task("integration-test", inputs=[git],
+     deps=[kind_cluster],
+     steps=[
+       fetch_kubeconfig(cluster_name, git),
+       k8s.corev1.Container(
+       name = "integration-tester",
+              workingDir = "/workspace/{}/".format(git),
+              image = "mesosphere/kubeaddons-ci:latest",
+              command = ["/bin/bash", "-c"],
+              args = [
+                  """
+                  export KUBECONFIG=`pwd`/kubeconfig
+                  set -euo pipefail
+                  export GIT_TERMINAL_PROMPT=1
+                  export GOPRIVATE=github.com/mesosphere/kubeaddons
+                  ssh-keyscan -t rsa github.com > /etc/ssh/known_hosts
+                  git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/"
+                  make kind-test
+                  """
+              ],
+              resources = k8s.corev1.ResourceRequirements(
+              limits = {
+                "cpu": k8s.resource_quantity("8000m"),
+                "memory": k8s.resource_quantity("6Gi")
+              },
+              requests = {
+                "cpu": k8s.resource_quantity("1000m"),
+                "memory": k8s.resource_quantity("1Gi")
+              }
+              ),
+              env=[k8s.corev1.EnvVar(name="GITHUB_TOKEN",
+                                     valueFrom=secretVar("d2iq-dispatch-github-personal-access-token",
+                                                         "GITHUB_TOKEN"))
+                  ]
+            )
+     ]
+)
+
+kind_cleanup = cleanup(kind_cluster, "integration-test", git)
+
+action(tasks=["integration-test", kind_cleanup], on=pullRequest())

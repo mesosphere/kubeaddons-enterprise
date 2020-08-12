@@ -1,7 +1,7 @@
 KUTTL_VERSION=0.5.0
 KIND_VERSION=0.8.1
 KUBERNETES_VERSION ?= 1.17.5
-KUBECONFIG=kubeconfig
+KUBECONFIG?=kubeconfig
 
 OS=$(shell uname -s | tr '[:upper:]' '[:lower:]')
 MACHINE=$(shell uname -m)
