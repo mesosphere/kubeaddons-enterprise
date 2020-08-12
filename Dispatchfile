@@ -22,13 +22,12 @@ task("integration-test", inputs=[git],
               command = ["/bin/bash", "-c"],
               args = [
                   """
-                  export KUBECONFIG=`pwd`/kubeconfig
                   set -euo pipefail
                   export GIT_TERMINAL_PROMPT=1
                   export GOPRIVATE=github.com/mesosphere/kubeaddons
                   ssh-keyscan -t rsa github.com > /etc/ssh/known_hosts
                   git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/"
-                  make kind-test
+                  KUBECONFIG=`pwd`/kubeconfig make kind-test
                   """
               ],
               resources = k8s.corev1.ResourceRequirements(
