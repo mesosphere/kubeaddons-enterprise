@@ -40,6 +40,7 @@ kubeaddons-tests:
 	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
 
 $(KUBECONFIG): install-bin
+	echo "CREATING KIND CLUSTER"
 	bin/kind create cluster --wait 10s --image=kindest/node:v$(KUBERNETES_VERSION)
 
 .PHONY: kind-test
