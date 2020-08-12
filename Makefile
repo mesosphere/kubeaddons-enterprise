@@ -41,7 +41,10 @@ kubeaddons-tests:
 
 $(KUBECONFIG): install-bin
 	echo $(KUBECONFIG)
-	bin/kind create cluster --wait 10s --image=kindest/node:v$(KUBERNETES_VERSION)
+	if [ -z $(KUBECONFIG) ]; then
+		echo "creating kind cluster"
+		bin/kind create cluster --wait 10s --image=kindest/node:v$(KUBERNETES_VERSION)
+	fi
 
 .PHONY: kind-test
 kind-test: kubeaddons-tests create-kind-cluster
