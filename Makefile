@@ -1,7 +1,7 @@
 KUTTL_VERSION=0.5.0
 KIND_VERSION=0.8.1
 KUBERNETES_VERSION ?= 1.17.5
-KUBECONFIG?=kubeconfig
+KUBECONFIG?="kubeconfig"
 
 OS=$(shell uname -s | tr '[:upper:]' '[:lower:]')
 MACHINE=$(shell uname -m)
@@ -40,11 +40,9 @@ kubeaddons-tests:
 	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
 
 $(KUBECONFIG): install-bin
-	echo $(KUBECONFIG)
-	if [ -z $(KUBECONFIG) ]; then
-		echo "creating kind cluster"
-		bin/kind create cluster --wait 10s --image=kindest/node:v$(KUBERNETES_VERSION)
-	fi
+ifeq ($(KUBECONFIG), "kubeconfig")
+	bin/kind create cluster --wait 10s --image=kindest/node:v$(KUBERNETES_VERSION)
+endif
 
 .PHONY: kind-test
 kind-test: kubeaddons-tests create-kind-cluster
