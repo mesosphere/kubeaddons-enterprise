@@ -43,8 +43,8 @@ $(KUBECONFIG): install-bin
 	bin/kind create cluster --wait 10s --image=kindest/node:v$(KUBERNETES_VERSION)
 
 .PHONY: kind-test
-kind-test: kubeaddons-tests create-kind-cluster
-	kubeaddons-tests/run-tests.sh
+kind-test: kubeaddons-tests
+	make -f kubeaddons-tests/Makefile kind-test
 
 .PHONY: clean
 clean:
