@@ -7,9 +7,9 @@ metadata:
     kubeaddons.mesosphere.io/name: kafka
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
-    catalog.kubeaddons.mesosphere.io/addon-revision: "2.5.0-1"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "2.5.0-2"
     appversion.kubeaddons.mesosphere.io/kafka: "2.5.0"
-    catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/kudobuilder/operators/master/repository/kafka/operator/params.yaml"
+    catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/kudobuilder/operators/ad/params-v1beta2/repository/kafka/operator/params.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.0
