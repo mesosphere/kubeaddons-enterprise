@@ -1,0 +1,7 @@
+#!mesosphere/dispatch-starlark:v0.6
+# vi:syntax=python
+load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.7", "cron")
+load("github.com/mesosphere/dispatch-tasks/bump_charts/bump_charts@master", "bump_charts")
+
+do_bump_charts = bump_charts(repo_name="kubeaddons-enterprise", task_name="bump-charts")
+action(name="bump-charts", on=cron(schedule="0 3 * * 5"), tasks=[do_bump_charts])
