@@ -7,7 +7,7 @@ metadata:
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "1.9.4-2"
     appversion.kubeaddons.mesosphere.io/jenkins: "1.9.4"
-    values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/helm/charts/6ec6034/stable/jenkins/values.yaml"
+    values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/jenkinsci/helm-charts/f251fce11b8c7dd376059732d965112e505907a3/charts/jenkins/values.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.3
@@ -23,7 +23,7 @@ spec:
   chartReference:
     chart: jenkins
     repo: https://charts.jenkins.io
-    version: 2.5.4
+    version: 2.6.4
     values: |
       ---
       master:
@@ -31,10 +31,10 @@ spec:
         installPlugins:
           - prometheus:2.0.6
           - kubernetes:1.18.2
-          - workflow-job:2.33
+          - workflow-job:2.39
           - workflow-aggregator:2.6
-          - credentials-binding:1.19
-          - git:3.11.0
+          - credentials-binding:1.23
+          - git:4.4.2
         csrf:
           defaultCrumbIssuer:
             enabled: false
