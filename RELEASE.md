@@ -23,7 +23,6 @@ Pull Requests of feature branches should be opened against the `dev` branch.
 
 On the second and forth _**Thursday**_, the `staging` should be updated. By merging `dev` into `staging` branch.
 
-
 Verify in AWS Soak cluster, the workspace of `kudo-testing` 
 
 - Verify the catalog in `kudo-staging` is accessible
