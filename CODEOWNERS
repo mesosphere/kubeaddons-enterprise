@@ -1,6 +1,6 @@
 * @mesosphere/sig-ksphere-catalog
 
-addons/zookeeper/* @nfnt @zmalik @mesosphere/d2iq-k8s-workloads
-addons/kafka/* @nfnt @zmalik @mesosphere/d2iq-k8s-workloads
+addons/zookeeper/* @mesosphere/d2iq-k8s-workloads @nfnt @zmalik 
+addons/kafka/* @mesosphere/d2iq-k8s-workloads @nfnt @zmalik
 addons/jenkins/* @takirala @chhsia0
-addons/spark/* @akirillov @alembiewski @mesosphere/d2iq-k8s-workloads
+addons/spark/* @mesosphere/d2iq-k8s-workloads @akirillov @alembiewski
