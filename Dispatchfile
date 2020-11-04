@@ -3,7 +3,7 @@
 load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.7", "cron")
 load("github.com/mesosphere/cluster-claim-controller/starlark/claim@master", "make_kind_cluster", "fetch_kubeconfig", "cleanup")
 load("github.com/mesosphere/dispatch-tasks/bump_charts/bump_charts@master", "bump_charts")
-load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.4", "gitResource", "pullRequest", "push", "volume", "resourceVar", "secretVar", "dindTask")
+load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.4", "gitResource", "pullRequest", "push", "volume", "resourceVar", "secretVar")
 
 git = "src-git"
 gitResource(git, url="$(context.git.url)", revision="$(context.git.commit)")
