@@ -14,55 +14,26 @@ export PATH := $(shell pwd)/bin/:$(PATH)
 
 ARTIFACTS=dist
 
-bin/kind_$(KIND_VERSION):
-	mkdir -p bin/
-	curl -Lo bin/kind_$(KIND_VERSION) https://github.com/kubernetes-sigs/kind/releases/download/v$(KIND_VERSION)/kind-$(OS)-$(KIND_MACHINE)
-	chmod +x bin/kind_$(KIND_VERSION)
-
-bin/kind: bin/kind_$(KIND_VERSION)
-	ln -sf ./kind_$(KIND_VERSION) bin/kind
-
-bin/kubectl-kuttl_$(KUTTL_VERSION):
-	mkdir -p bin/
-	curl -Lo bin/kubectl-kuttl_$(KUTTL_VERSION) https://github.com/kudobuilder/kuttl/releases/download/v$(KUTTL_VERSION)/kubectl-kuttl_$(KUTTL_VERSION)_$(OS)_$(MACHINE)
-	chmod +x bin/kubectl-kuttl_$(KUTTL_VERSION)
-
-bin/kubectl-kuttl: bin/kubectl-kuttl_$(KUTTL_VERSION)
-	ln -sf ./kubectl-kuttl_$(KUTTL_VERSION) bin/kubectl-kuttl
-
-.PHONY: install-bin
-install-bin: bin/kind bin/kubectl-kuttl
-
-.PHONY: create-kind-cluster
-create-kind-cluster: $(KUBECONFIG)
-
 kubeaddons-tests:
 	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
 
-$(KUBECONFIG): install-bin
-ifeq ($(KUBECONFIG), "kubeconfig")
-	bin/kind create cluster --wait 10s --image=kindest/node:v$(KUBERNETES_VERSION)
-endif
-
 .PHONY: kind-test
-kind-test: kubeaddons-tests create-kind-cluster
-	kubeaddons-tests/run-tests.sh
+kind-test: kubeaddons-tests
+	make -f kubeaddons-tests/Makefile kind-test
 
 .PHONY: clean
 clean:
-	bin/kind delete cluster
+ifneq (,$(wildcard kubeaddons-tests/Makefile))
+	make -f kubeaddons-tests/Makefile clean
+endif
 	rm -rf kubeaddons-tests
-	
-bin/kubectl-kuttl_$(KUTTL_VERSION):
-	mkdir -p bin/
-	curl -Lo bin/kubectl-kuttl_$(KUTTL_VERSION) https://github.com/kudobuilder/kuttl/releases/download/v$(KUTTL_VERSION)/kubectl-kuttl_$(KUTTL_VERSION)_$(OS)_$(MACHINE)
-	chmod +x bin/kubectl-kuttl_$(KUTTL_VERSION)
-	
-bin/kubectl-kuttl: bin/kubectl-kuttl_$(KUTTL_VERSION)
-	ln -sf ./kubectl-kuttl_$(KUTTL_VERSION) bin/kubectl-kuttl
 
 .PHONY: dispatch-test
-dispatch-test: bin/kubectl-kuttl
+dispatch-test: 
+        mkdir -p bin/
+	curl -Lo bin/kubectl-kuttl_$(KUTTL_VERSION) https://github.com/kudobuilder/kuttl/releases/download/v$(KUTTL_VERSION)/kubectl-kuttl_$(KUTTL_VERSION)_$(OS)_$(MACHINE)
+	chmod +x bin/kubectl-kuttl_$(KUTTL_VERSION)
+	ln -sf ./kubectl-kuttl_$(KUTTL_VERSION) bin/kubectl-kuttl
 	KUBEADDONS_TESTS_KUBECONFIG=/workspace/src-git/kubeconfig
 	git clone https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
 	kubeaddons-tests/run-tests.sh
