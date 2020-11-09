@@ -30,7 +30,7 @@ endif
 
 .PHONY: dispatch-test
 dispatch-test: 
-        mkdir -p bin/
+	mkdir -p bin/
 	curl -Lo bin/kubectl-kuttl_$(KUTTL_VERSION) https://github.com/kudobuilder/kuttl/releases/download/v$(KUTTL_VERSION)/kubectl-kuttl_$(KUTTL_VERSION)_$(OS)_$(MACHINE)
 	chmod +x bin/kubectl-kuttl_$(KUTTL_VERSION)
 	ln -sf ./kubectl-kuttl_$(KUTTL_VERSION) bin/kubectl-kuttl
