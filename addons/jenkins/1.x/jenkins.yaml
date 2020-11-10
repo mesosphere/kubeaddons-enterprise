@@ -22,15 +22,15 @@ spec:
     - name: none
       enabled: true
   chartReference:
-    chart: stable/jenkins
-    version: 1.9.4
+    chart: jenkins
+    repo: https://charts.jenkins.io
+    version: 2.6.4
     values: |
       ---
       master:
-        useSecurity: false
         installPlugins:
           - prometheus:2.0.6
-          - kubernetes:1.18.2
+          - kubernetes:1.24.1
           - workflow-job:2.33
           - workflow-aggregator:2.6
           - credentials-binding:1.19
@@ -46,3 +46,6 @@ spec:
           path: /jenkins
           annotations:
             kubernetes.io/ingress.class: traefik
+        sidecars:
+          configAutoReload:
+            enabled: false
