@@ -1,0 +1,52 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: jenkins
+  labels:
+    kubeaddons.mesosphere.io/name: jenkins
+  annotations:
+    catalog.kubeaddons.mesosphere.io/addon-revision: "2.6.4-1"
+    appversion.kubeaddons.mesosphere.io/jenkins: "2.6.4"
+    values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/jenkinsci/helm-charts/2e646e13bbc69f904d8d38f73249b395ff38e8b3/charts/jenkins/values.yaml"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.16.3
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: azure
+      enabled: true
+    - name: docker
+      enabled: true
+    - name: none
+      enabled: true
+  chartReference:
+    chart: jenkins
+    repo: https://charts.jenkins.io
+    version: 2.6.4
+    values: |
+      ---
+      master:
+        installPlugins:
+          - kubernetes:1.24.1
+        additionalPlugins:
+          - prometheus:2.0.6
+          - workflow-job:2.33
+          - workflow-aggregator:2.6
+          - credentials-binding:1.19
+          - git:3.11.0
+        csrf:
+          defaultCrumbIssuer:
+            enabled: false
+            proxyCompatability: false
+        serviceType: "ClusterIP"
+        jenkinsUriPrefix: "/jenkins"
+        ingress:
+          enabled: true
+          path: /jenkins
+          annotations:
+            kubernetes.io/ingress.class: traefik
+        sidecars:
+          configAutoReload:
+            enabled: false
