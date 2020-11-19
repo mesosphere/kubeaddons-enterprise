@@ -20,7 +20,7 @@ Pull Requests of feature branches should be opened against the `dev` branch.
 ## Deploying `staging` addons with Kommander
 
 This is best done on the soak cluster running on AWS, its Kommander already has a `kudo-staging` project.
-First, we need to update the `AddonRepository` of the `kudo-staging` project to point to the stating branch. For that, generate a cluster token in soak Konvoy UI to be able to use `kubectl`. There should be a `kudo-stating-%something%` namespace containing the `kubeaddons-enterprise` addonrepository. Edit this and change its `spec.ref` to the staging branch, e.g.:
+First, we need to update the `AddonRepository` of the `kudo-staging` project to point to the staging branch. For that, generate a cluster token in soak Konvoy UI to be able to use `kubectl`. There should be a `kudo-staging-%something%` namespace containing the `kubeaddons-enterprise` addonrepository. Edit this and change its `spec.ref` to the staging branch, e.g.:
 
 ```
 $ kubectl edit -n kudo-staging-vmg4d-j44g9 addonrepositories.kubeaddons.mesosphere.io kubeaddons-enterprise
