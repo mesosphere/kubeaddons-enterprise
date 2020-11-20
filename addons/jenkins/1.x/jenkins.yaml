@@ -22,7 +22,8 @@ spec:
     - name: none
       enabled: true
   chartReference:
-    chart: stable/jenkins
+    chart: jenkins
+    repo: https://charts.jenkins.io
     version: 1.9.4
     values: |
       ---
