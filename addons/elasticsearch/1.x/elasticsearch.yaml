@@ -2,14 +2,15 @@
 apiVersion: kubeaddons.mesosphere.io/v1beta1
 kind: Addon
 metadata:
-  name: elasticsearch/enterprise
+  name: elasticsearch
+  namespace: kubeaddons-enterprise
   labels:
-    kubeaddons.mesosphere.io/name: elasticsearch/enterprise
+    kubeaddons.mesosphere.io/name: elasticsearch
     # TODO: we're temporarily supporting dependency on an existing default storage class
     # on the cluster, this hack will trigger re-queue on Addons until one exists.
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
-    catalog.kubeaddons.mesosphere.io/addon-revision: "6.8.2-8"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "6.8.2-1"
     appversion.kubeaddons.mesosphere.io/elasticsearch: "6.8.2"
     values.chart.helm.kubeaddons.mesosphere.io/elasticsearch: "https://raw.githubusercontent.com/mesosphere/charts/73fba37/stable/elasticsearch/values.yaml"
 spec:
@@ -71,7 +72,7 @@ spec:
             set -o nounset
             set -o pipefail
 
-            CLIENT_URL=http://{{ template "elasticsearch.client.fullname" . }}.kubeaddons.svc.cluster.local.:9201
+            CLIENT_URL=http://{{ template "elasticsearch.client.fullname" . }}.kubeaddons-enterprise.svc.cluster.local.:9201
             # Wait until client nodes accept requests.
             # This prevents data pods from getting into a long CrashLoopBackoff.
             echo "Waiting for client node service ..."
