@@ -5,7 +5,7 @@ metadata:
   labels:
     kubeaddons.mesosphere.io/name: jenkins
   annotations:
-    catalog.kubeaddons.mesosphere.io/addon-revision: "1.9.4-2"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "1.9.4-3"
     appversion.kubeaddons.mesosphere.io/jenkins: "1.9.4"
     values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/helm/charts/7f134d3/stable/jenkins/values.yaml"
 spec:
@@ -21,7 +21,8 @@ spec:
     - name: none
       enabled: true
   chartReference:
-    chart: stable/jenkins
+    chart: jenkins
+    repo: https://charts.helm.sh/stable
     version: 2.5.4
     values: |
       ---
