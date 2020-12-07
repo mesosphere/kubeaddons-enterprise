@@ -1,0 +1,37 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: cassandra
+  labels:
+    kubeaddons.mesosphere.io/name: cassandra
+    kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
+  annotations:
+    catalog.kubeaddons.mesosphere.io/addon-revision: "3.11.7-1"
+    appversion.kubeaddons.mesosphere.io/cassandra: "3.11.7"
+    catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/mesosphere/kudo-cassandra-operator/v3.11.7-1.0.2/operator/params.yaml"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.16.0
+  requires:
+    - matchLabels:
+        # requires servicemonitors.monitoring.coreos.com CRD to be present
+        kubeaddons.mesosphere.io/name: prometheus
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: azure
+      enabled: true
+    - name: gcp
+      enabled: true
+    - name: docker
+      enabled: true
+    - name: none
+      enabled: true
+  kudoReference:
+    package: cassandra
+    repo: https://kudo-repository.storage.googleapis.com/v1
+    version: 1.0.2
+    appVersion: 3.11.7
+    parameters: |
+      PROMETHEUS_EXPORTER_ENABLED: true
