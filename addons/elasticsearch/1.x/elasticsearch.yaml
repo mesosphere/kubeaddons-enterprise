@@ -72,7 +72,7 @@ spec:
             set -o nounset
             set -o pipefail
 
-            CLIENT_URL=http://{{ template "elasticsearch.client.fullname" . }}.kubeaddons-enterprise.svc.cluster.local.:9201
+            CLIENT_URL=http://{{ template "elasticsearch.client.fullname" . }}.kubeaddons.svc.cluster.local.:9200
             # Wait until client nodes accept requests.
             # This prevents data pods from getting into a long CrashLoopBackoff.
             echo "Waiting for client node service ..."
