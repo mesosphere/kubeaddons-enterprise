@@ -1,16 +1,16 @@
 apiVersion: kubeaddons.mesosphere.io/v1beta2
 kind: Addon
 metadata:
-  name: kibana
+  name: kibana-ext
   namespace: kubeaddons-enterprise
   labels:
-    kubeaddons.mesosphere.io/name: kibana
+    kubeaddons.mesosphere.io/name: kibana-ext
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "6.8.10-1"
     appversion.kubeaddons.mesosphere.io/kibana: "6.8.10"
     endpoint.kubeaddons.mesosphere.io/kibana: "/ops/portal/kibana/enterprise"
     docs.kubeaddons.mesosphere.io/kibana: "https://www.elastic.co/guide/en/kibana/6.8/index.html"
-    values.chart.helm.kubeaddons.mesosphere.io/kibana: "https://raw.githubusercontent.com/mesosphere/charts/73fba37/stable/kibana/values.yaml"
+    values.chart.helm.kubeaddons.mesosphere.io/kibana: "https://raw.githubusercontent.com/amatuk/charts/master/stable/kibana/values.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.15.6
@@ -27,7 +27,7 @@ spec:
       enabled: true
   requires:
     - matchLabels:
-        kubeaddons.mesosphere.io/name: elasticsearch
+        kubeaddons.mesosphere.io/name: elasticsearch-ext
   chartReference:
     chart: kibana
     repo: https://mesosphere.github.io/charts/stable
@@ -41,15 +41,15 @@ spec:
       files:
         kibana.yml:
           ## Default Kibana configuration from kibana-docker.
-          elasticsearch.url: http://elasticsearch-kubeaddons-client:9201
+          elasticsearch.url: http://elasticsearch-kubeaddons-client:9200
           ## Ref: https://www.elastic.co/guide/en/kibana/current/settings.html
           server.basePath: /ops/portal/kibana/enterprise
       serviceAccount:
         create: true
       service:
         type: ClusterIP
-        externalPort: 5602
-        internalPort: 5602
+        externalPort: 5601
+        internalPort: 5601
         labels:
           servicemonitor.kubeaddons.mesosphere.io/path: "prometheus__metrics"
       resources:
@@ -73,7 +73,7 @@ spec:
             - -c
             - |
               #!/bin/sh
-              KB_URL=http://localhost:5602
+              KB_URL=http://localhost:5601
               while [[ "$(curl -s -o /dev/null -w '%{http_code}' -L ${KB_URL}/api/status)" != "200" ]]; do sleep 1; done
               INDICES="kubernetes_cluster kubernetes_audit kubernetes_host kubernetes_host_kernel"
               # Create index patterns
