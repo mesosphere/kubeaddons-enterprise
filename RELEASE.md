@@ -17,6 +17,44 @@ Feature branches should never interact directly with `master` or `staging` branc
 
 Pull Requests of feature branches should be opened against the `dev` branch. 
 
+## Deploying `staging` addons with Kommander
+
+This is best done on the soak cluster running on AWS, its Kommander already has a `kudo-staging` project.
+First, we need to update the `AddonRepository` of the `kudo-staging` project to point to the staging branch. For that, generate a cluster token in soak Konvoy UI to be able to use `kubectl`. There should be a `kudo-staging-%something%` namespace containing the `kubeaddons-enterprise` addonrepository. Edit this and change its `spec.ref` to the staging branch, e.g.:
+
+```
+$ kubectl edit -n kudo-staging-vmg4d-j44g9 addonrepositories.kubeaddons.mesosphere.io kubeaddons-enterprise
+
+apiVersion: v1
+items:
+- apiVersion: kubeaddons.mesosphere.io/v1beta2
+  kind: AddonRepository
+  metadata:
+    creationTimestamp: "2020-09-23T12:57:50Z"
+    generation: 1
+    name: kubeaddons-enterprise
+    namespace: kudo-staging-vmg4d-j44g9
+    resourceVersion: "19255350"
+    selfLink: /apis/kubeaddons.mesosphere.io/v1beta2/namespaces/kudo-staging-vmg4d-j44g9/addonrepositories/kubeaddons-enterprise
+    uid: b225c2df-7faa-4d29-81cc-ebb110600c1b
+  spec:
+    options:
+      credentialsRef: {}
+    priority: "1"
+    ref: my-staging-branch
+    url: https://github.com/mesosphere/kubeaddons-enterprise
+  status:
+    ready: true
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
+```
+
+Once that's done, create a cluster on AWS using the konvoy CLI. Get that cluster's kubeconfig, attach the cluster to soak's Kommander, then add the cluster to the `kudo-staging` project.
+
+You should now be able to view the staging addons in the project's catalog and deploy them on the attached cluster. Verify that the updated addons deploy successfully by adding them in Kommander and checking with `kubectl` that the respective instance resources are created on the attached cluster.
+
 ## Release Process
 
 ### Staging Update (Second and Forth Thursday)
