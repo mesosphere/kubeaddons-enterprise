@@ -1,3 +1,4 @@
+---
 apiVersion: kubeaddons.mesosphere.io/v1beta1
 kind: Addon
 metadata:
@@ -5,9 +6,9 @@ metadata:
   labels:
     kubeaddons.mesosphere.io/name: jenkins
   annotations:
-    catalog.kubeaddons.mesosphere.io/addon-revision: "1.9.4-2"
-    appversion.kubeaddons.mesosphere.io/jenkins: "1.9.4"
-    values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/helm/charts/7f134d3/stable/jenkins/values.yaml"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "2.5.4-1"
+    appversion.kubeaddons.mesosphere.io/jenkins: "2.5.4"
+    values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/helm/charts/master/stable/jenkins/values.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.3
@@ -21,7 +22,8 @@ spec:
     - name: none
       enabled: true
   chartReference:
-    chart: stable/jenkins
+    chart: jenkins
+    repo: https://charts.jenkins.io
     version: 2.5.4
     values: |
       ---
