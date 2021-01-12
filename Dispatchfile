@@ -27,7 +27,6 @@ task("integration-test", inputs=[git],
                   export GOPRIVATE=github.com/mesosphere/kubeaddons
                   ssh-keyscan -t rsa github.com > /etc/ssh/known_hosts
                   git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/"
-                  mv kubeconfig ./kubeaddons-tests/kubeconfig
                   make kind-test
                   """
               ],
