@@ -16,7 +16,7 @@ ARTIFACTS=dist
 
 kubeaddons-tests:
 	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
-	ifeq ("$(wildcard ./kubeconfig)", "")
+	ifneq (,"$(wildcard kubeconfig)")
 	  mv ./kubeaddons ./kubeaddons-tests/kubeconfig
 	endif
 
