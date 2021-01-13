@@ -28,8 +28,7 @@ task("integration-test", inputs=[git],
                   ssh-keyscan -t rsa github.com > /etc/ssh/known_hosts
                   git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/"
                   ls -a /workspace/src-git
-                  KUBEADDONS_TESTS_KUBECONFIG=/workspace/src-git/kubeconfig
-                  make dispatch-test
+                  make kind-test
                   """
               ],
               resources = k8s.corev1.ResourceRequirements(
