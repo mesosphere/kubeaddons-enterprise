@@ -1,7 +1,8 @@
 #!mesosphere/dispatch-starlark:v0.6
 # vi:syntax=python
 load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.7", "cron")
-load("github.com/mesosphere/cluster-claim-controller/starlark/claim@master", "make_kind_cluster", "fetch_kubeconfig", "cleanup")
+load("github.com/mesosphere/cluster-claim-controller/starlark/claim@master",
+     "make_kind_cluster_claim", "fetch_kubeconfig", "release_claim")
 load("github.com/mesosphere/dispatch-tasks/bump_charts/bump_charts@master", "bump_charts")
 load("github.com/mesosphere/dispatch-catalog/starlark/stable/pipeline@0.0.4", "gitResource", "pullRequest", "push", "volume", "resourceVar", "secretVar")
 
@@ -9,12 +10,12 @@ git = "src-git"
 gitResource(git, url="$(context.git.url)", revision="$(context.git.commit)")
 
 cluster_name = "kubeaddons"
-kind_cluster=make_kind_cluster(cluster_name, git)
+kind_cluster=make_kind_cluster_claim(cluster_name, deps=[git])
 
 task("integration-test", inputs=[git],
      deps=[kind_cluster],
      steps=[
-       fetch_kubeconfig(cluster_name, git),
+       fetch_kubeconfig(cluster_name, git, name="fetch-config"),
        k8s.corev1.Container(
        name = "integration-tester",
               workingDir = "/workspace/{}/".format(git),
@@ -50,9 +51,14 @@ task("integration-test", inputs=[git],
      ]
 )
 
-kind_cleanup = cleanup(kind_cluster, "integration-test", git)
+kind_cleanup = release_claim(kind_cluster, "integration-test")
 do_bump_charts = bump_charts(repo_name="kubeaddons-enterprise", task_name="bump-charts")
 
+#Robot Actions
 action(name="bump-charts", on=cron(schedule="0 3 * * 5"), tasks=[do_bump_charts])
+
+#PRs
 action(tasks=["integration-test", kind_cleanup], on=pullRequest())
 
+#Chatops Actions
+action(tasks=["integration-test", kind_cleanup], on=pullRequest(chatops=["test"]))
