@@ -15,10 +15,11 @@ export PATH := $(shell pwd)/bin/:$(PATH)
 ARTIFACTS=dist
 
 kubeaddons-tests:
-	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch && \
+	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
 	ls -a
-	-mv kubeconfig /kubeaddons-tests/kubeconfig
+	echo $pwd
 	ls -a /kubeaddons-tests
+	echo $pwd
 
 .PHONY: kind-test
 kind-test: kubeaddons-tests
