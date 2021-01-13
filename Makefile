@@ -37,13 +37,3 @@ ifneq (,$(wildcard kubeaddons-tests/Makefile))
 	make -f kubeaddons-tests/Makefile clean
 endif
 	rm -rf kubeaddons-tests
-
-.PHONY: dispatch-test
-dispatch-test:
-	mkdir -p bin/
-	curl -Lo bin/kubectl-kuttl_$(KUTTL_VERSION) https://github.com/kudobuilder/kuttl/releases/download/v$(KUTTL_VERSION)/kubectl-kuttl_$(KUTTL_VERSION)_$(OS)_$(MACHINE)
-	chmod +x bin/kubectl-kuttl_$(KUTTL_VERSION)
-	ln -sf ./kubectl-kuttl_$(KUTTL_VERSION) bin/kubectl-kuttl
-	KUBEADDONS_TESTS_KUBECONFIG=/workspace/src-git/kubeconfig
-	git clone https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
-	kubeaddons-tests/run-tests.sh
