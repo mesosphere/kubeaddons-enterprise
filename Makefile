@@ -15,7 +15,11 @@ export PATH := $(shell pwd)/bin/:$(PATH)
 ARTIFACTS=dist
 
 kubeaddons-tests:
-	ls -a && git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch && ls -a && [ ! -f kubeconfig ] || cp kubeconfig kubeaddons-tests/kubeconfig && ls -a ./kubeaddons-tests
+	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch 
+	ls -a
+	@if [ -f kubeconfig ]; then\
+		cp kubeconfig kubeaddons-tests/kubeconfig && ls -a ./kubeaddons-tests; \
+	fi
 .PHONY: kind-test
 kind-test: kubeaddons-tests
 	make -f kubeaddons-tests/Makefile kind-test
@@ -28,7 +32,7 @@ endif
 	rm -rf kubeaddons-tests
 
 .PHONY: dispatch-test
-dispatch-test: 
+dispatch-test:
 	mkdir -p bin/
 	curl -Lo bin/kubectl-kuttl_$(KUTTL_VERSION) https://github.com/kudobuilder/kuttl/releases/download/v$(KUTTL_VERSION)/kubectl-kuttl_$(KUTTL_VERSION)_$(OS)_$(MACHINE)
 	chmod +x bin/kubectl-kuttl_$(KUTTL_VERSION)
