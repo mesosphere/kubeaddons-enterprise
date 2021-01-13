@@ -15,8 +15,7 @@ export PATH := $(shell pwd)/bin/:$(PATH)
 ARTIFACTS=dist
 
 kubeaddons-tests:
-	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch && ls -a && ls -a .. && mv ../kubeconfig kubeconfig
-
+	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch && ls -a && cd .. && ls -a &&  [ ! -f kubeconfig ] || mv kubeconfig kubeaddons-tests/kubeconfig
 .PHONY: kind-test
 kind-test: kubeaddons-tests
 	make -f kubeaddons-tests/Makefile kind-test
