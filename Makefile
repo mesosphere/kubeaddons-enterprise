@@ -15,13 +15,13 @@ export PATH := $(shell pwd)/bin/:$(PATH)
 ARTIFACTS=dist
 
 kubeaddons-tests:
-	echo $PWD
+	echo $(shell pwd)
 	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
-	echo $PWD
+	echo $(shell pwd)
 	ls -a
 	echo "Getting out of the clone dir"
 	cd ..
-	echo $PWD
+	echo $(shell pwd)
 	ls -a
 	mv kubeconfig /kubeaddons-tests/kubeconfig
 
