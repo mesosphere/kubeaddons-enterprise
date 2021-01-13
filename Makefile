@@ -16,7 +16,12 @@ ARTIFACTS=dist
 
 kubeaddons-tests:
 	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
-	mv ../kubeconfig ./kubeconfig
+	echo &pwd
+	ls -a
+	cd ..
+	echo $pwd
+	ls -a
+	mv kubeconfig /kubeaddons-tests/kubeconfig
 
 .PHONY: kind-test
 kind-test: kubeaddons-tests
