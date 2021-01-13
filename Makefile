@@ -34,6 +34,6 @@ endif
 .PHONY: clean
 clean:
 ifneq (,$(wildcard kubeaddons-tests/Makefile))
-	make -f kubeaddons-tests/Makefile clean
+	make -C kubeaddons-tests clean
 endif
 	rm -rf kubeaddons-tests
