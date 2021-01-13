@@ -15,7 +15,7 @@ export PATH := $(shell pwd)/bin/:$(PATH)
 ARTIFACTS=dist
 
 kubeaddons-tests:
-        echo $pwd
+	echo $pwd
 	git clone --depth 1 https://github.com/mesosphere/kubeaddons-tests.git --branch master --single-branch
 	echo $pwd
 	ls -a
