@@ -23,7 +23,13 @@ kubeaddons-tests:
 
 .PHONY: kind-test
 kind-test: kubeaddons-tests
+ifeq (,$(wildcard kubeconfig))
 	$(MAKE) -C kubeaddons-tests kind-test
+else
+	$(MAKE) -C kubeaddons-tests bin/kubectl-kuttl
+	$(MAKE) -o kubeconfig -C kubeaddons-tests kind-test
+endif
+
 
 .PHONY: clean
 clean:
