@@ -29,7 +29,7 @@ task("integration-test", inputs=[git],
                   git config --global url."https://$GITHUB_TOKEN:@github.com/".insteadOf "https://github.com/"
                   ls -a /workspace/src-git
                   KUBEADDONS_TESTS_KUBECONFIG=/workspace/src-git/kubeconfig
-                  make kind-test
+                  make dispatch-test
                   """
               ],
               resources = k8s.corev1.ResourceRequirements(
