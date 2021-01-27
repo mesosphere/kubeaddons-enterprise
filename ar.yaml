@@ -1,0 +1,11 @@
+apiVersion: kubeaddons.mesosphere.io/v1beta2
+kind: AddonRepository
+metadata:
+  name: kubeaddons-enterprise
+  namespace: data-processing-4jmw8-rvz2v
+spec:
+  options:
+    credentialsRef: {}
+  priority: "1"
+  ref: sparktest
+  url: https://github.com/mesosphere/kubeaddons-enterprise
