@@ -1,0 +1,35 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: prometheus-kubeaddons
+    meta.helm.sh/release-namespace: kubeaddons
+  labels:
+    app: prometheus-operator-prometheus
+    app.kubernetes.io/managed-by: Helm
+    chart: prometheus-operator-9.3.3
+    heritage: Helm
+    release: prometheus-kubeaddons
+  name: kubeaddons-service-monitor-metrics
+  namespace: kubeaddons
+spec:
+  endpoints:
+  - interval: 30s
+    port: metrics
+  - interval: 30s
+    port: monitoring
+  - interval: 30s
+    port: app-metrics
+  - interval: 30s
+    targetPort: 7979
+  - interval: 30s
+    targetPort: 10902
+  namespaceSelector:
+    matchNames:
+    - kubeaddons
+    - kubeaddons-enterprise
+    - kommander
+    - velero
+  selector:
+    matchLabels:
+      servicemonitor.kubeaddons.mesosphere.io/path: metrics
