@@ -12,7 +12,7 @@ metadata:
     catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/kudobuilder/operators/master/repository/spark/operator/params.yaml"
 spec:
   kubernetes:
-    minSupportedVersion: v1.19.0
+    minSupportedVersion: v1.16.0
   cloudProvider:
     - name: aws
       enabled: true
