@@ -1,0 +1,62 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: kibana-oss
+  labels:
+    kubeaddons.mesosphere.io/name: kibana-oss
+  annotations:
+    catalog.kubeaddons.mesosphere.io/addon-revision: "7.10.0-1"
+    appversion.kubeaddons.mesosphere.io/kibana-oss: "7.10.0"
+    endpoint.kubeaddons.mesosphere.io/kibana-oss: "/ops/portal/kibana-oss"
+    docs.kubeaddons.mesosphere.io/kibana-oss: "https://www.elastic.co/guide/en/kibana/7.10/index.html"
+    values.chart.helm.kubeaddons.mesosphere.io/kibana-oss: "https://raw.githubusercontent.com/mesosphere/kubeaddons-elastic/kibana-7.10.x/values.yaml?token=AA7WBLXDW6FOT55PL74IUCLADODWA"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.15.0
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: azure
+      enabled: true
+    - name: gcp
+      enabled: true
+    - name: docker
+      enabled: false
+    - name: none
+      enabled: true
+  requires:
+    - matchLabels:
+        kubeaddons.mesosphere.io/provides: storageclass
+    - matchLabels:
+        kubeaddons.mesosphere.io/name: elasticsearch-oss
+  chartReference:
+    chart: kubeaddons-kibana
+    repo: https://mesosphere.github.io/kubeaddons-elastic
+    version: 0.1.0
+    valuesRemap:
+      "ingress.annotations.traefik\\.ingress\\.kubernetes\\.io/auth-url": "ingress.auth.auth-url"
+    values: |
+      ---
+      kibana:
+        image: "docker.elastic.co/kibana/kibana-oss"
+        imageTag: "7.10.0"
+        elasticsearchHosts: "http://elasticsearch-oss-client:9200"
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: traefik
+            ingress.kubernetes.io/auth-response-headers: X-Forwarded-User
+            traefik.frontend.rule.type: PathPrefixStrip
+            traefik.ingress.kubernetes.io/auth-response-headers: X-Forwarded-User,Authorization,Impersonate-User,Impersonate-Group
+            traefik.ingress.kubernetes.io/auth-type: forward
+            traefik.ingress.kubernetes.io/auth-url: http://traefik-forward-auth-kubeaddons.kubeaddons.svc.cluster.local:4181/
+            traefik.ingress.kubernetes.io/priority: "2"
+          hosts: [""]
+          path: /ops/portal/kibana-oss
+        kibanaConfig:
+          kibana.yml: |
+            server.rewriteBasePath: false
+            server.basePath: /ops/portal/kibana-oss
+            server.port: 5601
+            server.host: "0.0.0.0"
