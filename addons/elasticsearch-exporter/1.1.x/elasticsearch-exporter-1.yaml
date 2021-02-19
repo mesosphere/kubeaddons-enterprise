@@ -1,9 +1,10 @@
-apiVersion: kubeaddons.mesosphere.io/v1beta1
+apiVersion: kubeaddons.mesosphere.io/v1beta2
 kind: Addon
 metadata:
   name: elasticsearch-exporter
   labels:
     kubeaddons.mesosphere.io/name: elasticsearch-exporter
+    kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "1.1.0-4"
     appversion.kubeaddons.mesosphere.io/elasticsearchexporter: "1.1.0"

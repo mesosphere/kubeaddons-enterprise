@@ -5,6 +5,7 @@ metadata:
   name: kibana-oss
   labels:
     kubeaddons.mesosphere.io/name: kibana-oss
+    kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "7.10.0-1"
     appversion.kubeaddons.mesosphere.io/kibana-oss: "7.10.0"
@@ -26,8 +27,6 @@ spec:
     - name: none
       enabled: true
   requires:
-    - matchLabels:
-        kubeaddons.mesosphere.io/provides: storageclass
     - matchLabels:
         kubeaddons.mesosphere.io/name: elasticsearch-oss
   chartReference:
