@@ -7,8 +7,8 @@ metadata:
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "1.1.0-4"
-    appversion.kubeaddons.mesosphere.io/elasticsearchexporter: "1.1.0"
-    values.chart.helm.kubeaddons.mesosphere.io/elasticsearchexporter: "https://raw.githubusercontent.com/mesosphere/charts/73fba37/stable/elasticsearch-exporter/values.yaml"
+    appversion.kubeaddons.mesosphere.io/elasticsearch-exporter: "1.1.0"
+    values.chart.helm.kubeaddons.mesosphere.io/elasticsearch-exporter: "https://raw.githubusercontent.com/mesosphere/charts/73fba37/stable/elasticsearch-exporter/values.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.15.6
