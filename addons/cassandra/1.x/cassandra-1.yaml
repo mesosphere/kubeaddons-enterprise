@@ -9,7 +9,7 @@ metadata:
   annotations:
     catalog.kubeaddons.mesosphere.io/addon-revision: "3.11.6-1"
     appversion.kubeaddons.mesosphere.io/cassandra: "3.11.6"
-    catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/kudobuilder/operators/master/repository/cassandra/3.11/operator/params.yaml"
+    catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/mesosphere/kudo-cassandra-operator/v3.11.6-1.0.0/operator/params.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.0
