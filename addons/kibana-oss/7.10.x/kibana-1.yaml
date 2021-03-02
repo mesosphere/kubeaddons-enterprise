@@ -11,7 +11,7 @@ metadata:
     appversion.kubeaddons.mesosphere.io/kibana-oss: "7.10.0"
     endpoint.kubeaddons.mesosphere.io/kibana-oss: "/ops/portal/kibana-oss"
     docs.kubeaddons.mesosphere.io/kibana-oss: "https://www.elastic.co/guide/en/kibana/7.10/index.html"
-    values.chart.helm.kubeaddons.mesosphere.io/kibana-oss: "https://raw.githubusercontent.com/mesosphere/kubeaddons-elastic/kibana-7.10.x/values.yaml?token=AA7WBLXDW6FOT55PL74IUCLADODWA"
+    values.chart.helm.kubeaddons.mesosphere.io/kibana-oss: "https://raw.githubusercontent.com/mesosphere/kubeaddons-elastic/kibana-7.10.x/values.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.15.0
