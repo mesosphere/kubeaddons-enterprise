@@ -1,0 +1,54 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta2
+kind: Addon
+metadata:
+  name: elasticsearch-oss
+  labels:
+    kubeaddons.mesosphere.io/name: elasticsearch-oss
+    kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
+  annotations:
+    catalog.kubeaddons.mesosphere.io/addon-revision: "7.10.0-1"
+    appversion.kubeaddons.mesosphere.io/elasticsearch-oss: "7.10.0"
+    docs.kubeaddons.mesosphere.io/elasticsearch-oss: "https://www.elastic.co/guide/en/elasticsearch/reference/7.10/index.html"
+    values.chart.helm.kubeaddons.mesosphere.io/elasticsearch-oss: "https://raw.githubusercontent.com/mesosphere/kubeaddons-elastic/elastic-7.10.x/values.yaml"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.15.0
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: azure
+      enabled: true
+    - name: gcp
+      enabled: true
+    - name: docker
+      enabled: false
+    - name: none
+      enabled: true
+  chartReference:
+    chart: kubeaddons-elasticsearch
+    repo: https://mesosphere.github.io/kubeaddons-elastic
+    version: 0.1.0
+    values: |
+      ---
+      # Recommended defaults used here, view Helm chart values to
+      # override any defaults set here.
+      elasticsearch-master:
+        # It is suggested that this match the catalog addon name.
+        clusterName: "elasticsearch-oss"
+      elasticsearch-client:
+        # It is suggested that this match the catalog addon name.
+        clusterName: "elasticsearch-oss"
+        # This must equal <elasticsearch-master.clusterName>-master
+        masterService: "elasticsearch-oss-master"
+      elasticsearch-data:
+        # It is suggested that this match the catalog addon name.
+        clusterName: "elasticsearch-oss"
+        # This must equal <elasticsearch-master.clusterName>-master
+        masterService: "elasticsearch-oss-master"
+      elasticsearch-ingest:
+        # It is suggested that this match the catalog addon name.
+        clusterName: "elasticsearch-oss"
+        # This must equal <elasticsearch-master.clusterName>-master
+        masterService: "elasticsearch-oss-master"
+        replicas: 0 #Disabled

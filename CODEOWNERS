@@ -3,5 +3,8 @@
 /addons/zookeeper/ @mesosphere/d2iq-k8s-workloads @mesosphere/guild-data-services
 /addons/kafka/ @mesosphere/d2iq-k8s-workloads @mesosphere/guild-data-services
 /addons/cassandra/ @mesosphere/d2iq-k8s-workloads @mesosphere/guild-data-services
+/addons/elasticsearch-oss/ @mesosphere/d2iq-k8s-workloads @mesosphere/guild-data-services
+/addons/elasticsearch-exporter/ @mesosphere/d2iq-k8s-workloads @mesosphere/guild-data-services
+/addons/kibana-oss/ @mesosphere/d2iq-k8s-workloads @mesosphere/guild-data-services
 /addons/jenkins/ @takirala @chhsia0
 /addons/spark/ @mesosphere/d2iq-k8s-workloads @akirillov @alembiewski
