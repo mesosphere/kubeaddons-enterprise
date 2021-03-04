@@ -39,8 +39,8 @@ task("integration-test", inputs=[git],
                 "memory": k8s.resource_quantity("6Gi")
               },
               requests = {
-                "cpu": k8s.resource_quantity("500m"),
-                "memory": k8s.resource_quantity("1Gi")
+                "cpu": k8s.resource_quantity("8000m"),
+                "memory": k8s.resource_quantity("6Gi")
               }
               ),
               env=[k8s.corev1.EnvVar(name="GITHUB_TOKEN",
