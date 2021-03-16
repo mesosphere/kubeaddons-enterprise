@@ -83,3 +83,54 @@ cassandra:
     - type: support
       title: Submit a Support Request
       link: https://d2iq.com/services-and-support
+elasticsearch-oss:
+  display_name: Elasticsearch-OSS
+  description: Elasticsearch
+  logo: elasticsearch-oss/logo.svg
+  category: Data Services
+  overview: elasticsearch-oss/overview.md
+  resources:
+    provider:
+      title: Elasticsearch
+      link: https://www.elastic.co/elasticsearch/
+    links:
+    - type: resources
+      title: Documentation
+      link: https://github.com/elastic/elasticsearch
+    - type: support
+      title: Submit a Support Request
+      link: https://d2iq.com/services-and-support
+kibana-oss:
+  display_name: Kibana-OSS
+  description: Kibana
+  logo: kibana-oss/logo.svg
+  category: Data Services
+  overview: kibana-oss/overview.md
+  resources:
+    provider:
+      title: Kibana
+      link: https://www.elastic.co/kibana/
+    links:
+    - type: resources
+      title: Documentation
+      link: https://github.com/elastic/kibana
+    - type: support
+      title: Submit a Support Request
+      link: https://d2iq.com/services-and-support
+elasticsearch-exporter:
+  display_name: Elasticsearch Exporter
+  description: Elasticsearch Exporter
+  logo: elasticsearch-exporter/logo.svg
+  category: Data Services
+  overview: elasticsearch-exporter/overview.md
+  resources:
+    provider:
+      title: Elasticsearch Exporter
+      link: https://github.com/justwatchcom/elasticsearch_exporter
+    links:
+    - type: resources
+      title: Documentation
+      link: https://github.com/justwatchcom/elasticsearch_exporter
+    - type: support
+      title: Submit a Support Request
+      link: https://d2iq.com/services-and-support
