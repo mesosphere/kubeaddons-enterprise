@@ -32,6 +32,6 @@ spec:
   kudoReference:
     package: spark
     repo: https://kudo-repository.storage.googleapis.com/0.10.0
-    version: 1.0.0
+    version: 1.0.1
     parameters: |
       enableMetrics: true
