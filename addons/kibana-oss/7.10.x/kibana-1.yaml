@@ -7,6 +7,7 @@ metadata:
     kubeaddons.mesosphere.io/name: kibana-oss
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
+    catalog.kubeaddons.mesosphere.io/certification: '["certified"]'
     catalog.kubeaddons.mesosphere.io/addon-revision: "7.10.0-1"
     appversion.kubeaddons.mesosphere.io/kibana-oss: "7.10.0"
     endpoint.kubeaddons.mesosphere.io/kibana-oss: "/ops/portal/kibana-oss"

@@ -7,6 +7,7 @@ metadata:
     kubeaddons.mesosphere.io/name: spark
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
+    catalog.kubeaddons.mesosphere.io/certification: '["certified", "supported"]'
     catalog.kubeaddons.mesosphere.io/addon-revision: "2.4.5-1"
     appversion.kubeaddons.mesosphere.io/spark: "2.4.5"
 spec:
