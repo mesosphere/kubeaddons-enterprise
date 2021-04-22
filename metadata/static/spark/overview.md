@@ -23,11 +23,5 @@ Learn how to take full advantage of KUDO Spark in [docs](https://github.com/kudo
 Spark addon requires previous installation of:
 - Prometheus operator
 
-## Support Level
-- Mixed workload tested with:
-  - 50 operators
-  - 1000 Spark jobs with 1000 drivers and 1000 executor pods running concurrently
-  - TeraSort benchmark successfully completed and validated  
-
 ## License
 [Apache License 2.0](https://github.com/kudobuilder/operators/blob/master/LICENSE)

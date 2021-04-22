@@ -6,8 +6,5 @@ The KUDO Zookeeper operator creates, configures and manages Apache Zookeeper clu
 
 Learn how to take full advantage of KUDO Zookeeper in [docs](https://github.com/kudobuilder/operators/tree/master/repository/zookeeper) available in [operators](https://github.com/kudobuilder/operators) repository
 
-## Support Level
-KUDO Zookeeper is only tested with KUDO Kafka 
-
 ## License
 [Apache License 2.0](https://github.com/kudobuilder/operators/blob/master/LICENSE)

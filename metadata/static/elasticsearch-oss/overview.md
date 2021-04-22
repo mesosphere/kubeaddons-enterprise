@@ -4,8 +4,5 @@ Elasticsearch is a distributed, RESTful search and analytics engine capable of a
 As the heart of the Elastic Stack, it centrally stores your data for lightning fast search, fine‑tuned relevancy,
 and powerful analytics that scale with ease.
 
-## Support Level
-- Base tech support
-
 ## License
 [Apache 2.0](https://raw.githubusercontent.com/elastic/elasticsearch/master/LICENSE.txt)

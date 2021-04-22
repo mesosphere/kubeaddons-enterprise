@@ -19,10 +19,5 @@ Kafka addon requires previous installation of:
 - Zookeeper operator
 - Prometheus operator
 
-## Support Level
-- Mixed workload tested with 5 brokers, 4096Mib and 2000m each
-  - 5Million msgs/sec with avg message size of 60 bytes
-- Base tech support
-
 ## License
 [Apache License 2.0](https://github.com/kudobuilder/operators/blob/master/LICENSE)
