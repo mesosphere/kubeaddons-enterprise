@@ -5,7 +5,7 @@ As the heart of the Elastic Stack, it centrally stores your data for lightning f
 and powerful analytics that scale with ease.
 
 ## Support Level
-- Base tech support
+- Mixed workload tested
 
 ## License
 [Apache 2.0](https://raw.githubusercontent.com/elastic/elasticsearch/master/LICENSE.txt)

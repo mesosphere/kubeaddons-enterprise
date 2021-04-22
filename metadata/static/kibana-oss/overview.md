@@ -5,7 +5,7 @@ on top of the content indexed on an Elasticsearch cluster. Users can create bar,
 charts and maps on top of large volumes of data.
 
 ## Support Level
-- Base tech support
+- Mixed workload tested
 
 ## License
 [Apache 2.0](https://raw.githubusercontent.com/elastic/kibana/master/LICENSE.txt)

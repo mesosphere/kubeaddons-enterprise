@@ -7,7 +7,6 @@ ways to define your build pipelines and integrating with a large number of testi
 ## Support Level
 - Mixed workload tested
   - 250 Jenkins Masters
-- Base tech support
 
 ## License
 [MIT](https://github.com/jenkinsci/jenkins/blob/master/LICENSE.txt)
