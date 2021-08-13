@@ -7,30 +7,30 @@ metadata:
     kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations:
     catalog.kubeaddons.mesosphere.io/certification: '["certified"]'
-    catalog.kubeaddons.mesosphere.io/addon-revision: "1.1.0-4"
-    appversion.kubeaddons.mesosphere.io/elasticsearch-exporter: "1.1.0"
-    values.chart.helm.kubeaddons.mesosphere.io/elasticsearch-exporter: "https://raw.githubusercontent.com/mesosphere/charts/73fba37/stable/elasticsearch-exporter/values.yaml"
+    catalog.kubeaddons.mesosphere.io/addon-revision: "1.2.1-1"
+    appversion.kubeaddons.mesosphere.io/elasticsearch-exporter: "1.2.1"
+    values.chart.helm.kubeaddons.mesosphere.io/elasticsearch-exporter: "https://raw.githubusercontent.com/mesosphere/charts/9c84710/stable/elasticsearch-exporter/values.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.15.0
   cloudProvider:
-  - name: aws
-    enabled: true
-  - name: azure
-    enabled: true
-  - name: gcp
-    enabled: true
-  - name: docker
-    enabled: false
-  - name: none
-    enabled: true
+    - name: aws
+      enabled: true
+    - name: azure
+      enabled: true
+    - name: gcp
+      enabled: true
+    - name: docker
+      enabled: false
+    - name: none
+      enabled: true
   requires:
-  - matchLabels:
-      kubeaddons.mesosphere.io/name: elasticsearch-oss
+    - matchLabels:
+        kubeaddons.mesosphere.io/name: elasticsearch-oss
   chartReference:
     chart: prometheus-elasticsearch-exporter
     repo: https://prometheus-community.github.io/helm-charts
-    version: 4.0.0
+    version: 4.6.0
     values: |
       ---
       #fullnameOverride: ""
