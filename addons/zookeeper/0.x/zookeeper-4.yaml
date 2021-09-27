@@ -1,0 +1,27 @@
+---
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: zookeeper
+  labels:
+    kubeaddons.mesosphere.io/name: zookeeper
+    kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
+  annotations:
+    catalog.kubeaddons.mesosphere.io/certification: '["certified", "supported"]'
+    catalog.kubeaddons.mesosphere.io/addon-revision: "3.4.14-4"
+    appversion.kubeaddons.mesosphere.io/zookeeper: "3.4.14"
+    catalog.kubeaddons.mesosphere.io/kudo-params: "https://raw.githubusercontent.com/kudobuilder/operators/master/repository/zookeeper/operator/params.yaml"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.16.0
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: docker
+      enabled: true
+    - name: none
+      enabled: true
+  kudoReference:
+    package: zookeeper
+    repo: https://kudo-repository.storage.googleapis.com/0.10.0
+    version: 0.3.1
