@@ -9,7 +9,7 @@ metadata:
     catalog.kubeaddons.mesosphere.io/certification: '["certified"]'
     catalog.kubeaddons.mesosphere.io/addon-revision: "2.5.4-1"
     appversion.kubeaddons.mesosphere.io/jenkins: "2.5.4"
-    values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/helm/charts/master/stable/jenkins/values.yaml"
+    values.chart.helm.kubeaddons.mesosphere.io/jenkins: "https://raw.githubusercontent.com/jenkinsci/helm-charts/382e3278f77f9c5a65d0fe0b6be389aef4b33fb3/charts/jenkins/values.yaml"
 spec:
   kubernetes:
     minSupportedVersion: v1.16.3
